@@ -1,0 +1,1931 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DDLC Technologies - Intelligent Control Systems</title>
+    <meta name="description"
+        content="Data Driven Logic Controllers (DDLC) act as the intelligent orchestrators atop your PLCs. Bringing AI into the control loop.">
+    <meta name="theme-color" content="#ffffff">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="default">
+
+    <!-- Professional Grade Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,300;12..96,400&family=Inter:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500;600&family=Plus+Jakarta+Sans:wght@400;500;600;700&family=Syne:wght@800&family=DM+Mono:wght@400;500&display=swap"
+        rel="stylesheet">
+
+    <style>
+        /* CSS Reset & Variables */
+        :root {
+            /* Colors */
+            --pure-white: #ffffff;
+            --light-bg: #f8fafc;
+            /* Crisp slate-50 */
+            --primary-green: #10b981;
+            /* Premium Emerald */
+            --dark-green: #059669;
+            --black-text: #0f172a;
+            /* Slate 900 */
+            --gray-text: #475569;
+            /* Slate 600 */
+            --border-color: #cbd5e1;
+            /* Slate 300 */
+            --card-shadow: 0 10px 40px -10px rgba(0, 0, 0, 0.06);
+            --card-shadow-hover: 0 20px 40px -10px rgba(16, 185, 129, 0.15);
+
+            /* Typography */
+            --font-display: 'Plus Jakarta Sans', sans-serif;
+            --font-body: 'Inter', sans-serif;
+            --font-label: 'JetBrains Mono', monospace;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: var(--font-body);
+            background-color: #ffffff;
+            color: var(--black-text);
+            line-height: 1.6;
+            overflow-x: hidden;
+            -webkit-font-smoothing: antialiased;
+            position: relative;
+        }
+
+        body::before {
+            content: "";
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: 
+                linear-gradient(to right, rgba(0,0,0,0.03) 1px, transparent 1px),
+                linear-gradient(to bottom, rgba(0,0,0,0.03) 1px, transparent 1px);
+            background-size: 60px 60px;
+            pointer-events: none;
+            z-index: -1;
+        }
+
+        body::after {
+            content: "";
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(circle at 50% 50%, transparent 0%, #ffffff 100%);
+            pointer-events: none;
+            z-index: -1;
+            opacity: 0.6;
+        }
+
+        a {
+            text-decoration: none;
+            color: inherit;
+            transition: all 0.2s ease;
+        }
+
+        img {
+            max-width: 100%;
+            display: block;
+        }
+
+        /* Typography Utilities */
+        .large-heading {
+            font-family: var(--font-display);
+            font-weight: 700;
+            font-size: clamp(1.5rem, 3.2vw, 2.75rem);
+            line-height: 1.15;
+            margin-bottom: 1rem;
+            letter-spacing: -0.02em;
+            color: var(--black-text);
+        }
+
+        .section-label {
+            font-family: var(--font-label);
+            font-weight: 600;
+            font-size: 0.8rem;
+            text-transform: uppercase;
+            color: var(--primary-green);
+            letter-spacing: 0.08em;
+            margin-bottom: 0.75rem;
+            display: inline-block;
+            padding: 0;
+            background: transparent;
+        }
+
+        .body-text {
+            font-family: var(--font-body);
+            font-weight: 400;
+            font-size: 1.05rem;
+            color: var(--gray-text);
+            line-height: 1.6;
+            margin-bottom: 1.5rem;
+        }
+
+        /* Layout */
+        .container {
+            max-width: 1140px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        .section {
+            padding: 8rem 0;
+            position: relative;
+        }
+
+        .bg-light {
+            background-color: rgba(248, 250, 252, 0.5);
+            backdrop-filter: blur(5px);
+            border-top: 1px solid var(--border-color);
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        /* Grids */
+        .grid-2 {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2.5rem;
+            align-items: center;
+        }
+
+        .grid-3 {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1.5rem;
+        }
+
+        /* Utilities */
+        .rounded-24 {
+            border-radius: 12px;
+        }
+
+        .text-green {
+            color: var(--primary-green);
+        }
+
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            padding: 1.125rem 2.5rem;
+            background-color: var(--primary-green);
+            color: var(--pure-white);
+            font-family: var(--font-display);
+            font-weight: 600;
+            border-radius: 12px;
+            border: 2px solid var(--primary-green);
+            cursor: pointer;
+            transition: all 0.2s ease;
+            font-size: 1rem;
+        }
+
+        .btn:hover {
+            background-color: var(--dark-green);
+            border-color: var(--dark-green);
+            transform: scale(1.02);
+            box-shadow: 0 10px 20px rgba(16, 185, 129, 0.2);
+        }
+
+        .btn-outline {
+            background-color: transparent;
+            color: var(--black-text);
+            border: 2px solid var(--border-color);
+        }
+
+        .btn-outline:hover {
+            background-color: transparent;
+            border-color: var(--primary-green);
+            color: var(--primary-green);
+            box-shadow: none;
+        }
+
+        /* App Store Badges */
+        .app-store-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.75rem;
+            background: var(--black-text);
+            color: var(--pure-white);
+            padding: 0.5rem 1.25rem;
+            border-radius: 12px;
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+
+        .app-store-badge:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15);
+        }
+
+        .app-store-badge svg {
+            width: 28px;
+            height: 28px;
+            fill: currentColor;
+        }
+
+        .badge-text {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+            text-align: left;
+        }
+
+        .badge-text span {
+            font-size: 0.65rem;
+            text-transform: uppercase;
+            font-family: var(--font-label);
+            letter-spacing: 0.05em;
+            line-height: 1;
+            margin-bottom: 2px;
+        }
+
+        .badge-text strong {
+            font-size: 1.1rem;
+            font-family: var(--font-display);
+            font-weight: 600;
+            line-height: 1;
+        }
+
+        /* Brand Image Filter */
+        .branded-img {
+            filter: grayscale(80%) sepia(10%) hue-rotate(100deg);
+            transition: filter 0.3s ease;
+        }
+
+        .branded-img:hover {
+            filter: grayscale(40%) sepia(0%) hue-rotate(100deg);
+        }
+
+        /* Navigation */
+        .navbar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            background-color: rgba(255, 255, 255, 0.9);
+            backdrop-filter: blur(24px);
+            -webkit-backdrop-filter: blur(24px);
+            border-bottom: 1px solid rgba(226, 232, 240, 0.8);
+            z-index: 1000;
+            height: 64px;
+            display: flex;
+            align-items: center;
+            transition: all 0.3s ease;
+        }
+
+        .nav-container {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            width: 100%;
+        }
+
+        .logo {
+            font-family: var(--font-display);
+            font-weight: 800;
+            font-size: 1.5rem;
+            color: var(--primary-green);
+            letter-spacing: -2px;
+        }
+
+        .logo span {
+            color: var(--black-text);
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2.5rem;
+            align-items: center;
+        }
+
+        .nav-links a {
+            font-family: var(--font-body);
+            font-weight: 500;
+            color: var(--gray-text);
+            font-size: 1rem;
+        }
+
+        .nav-links a:hover {
+            color: var(--primary-green);
+        }
+
+        .mobile-menu-btn {
+            display: none;
+            background: none;
+            border: none;
+            cursor: pointer;
+            z-index: 2000;
+            width: 32px;
+            height: 32px;
+            position: relative;
+        }
+
+        .hamburger-line {
+            display: block;
+            width: 24px;
+            height: 2px;
+            background: var(--black-text);
+            position: absolute;
+            left: 4px;
+            transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        .line-1 { top: 10px; }
+        .line-2 { top: 18px; }
+
+        .mobile-menu-btn.active .line-1 {
+            transform: translateY(4px) rotate(45deg);
+        }
+        .mobile-menu-btn.active .line-2 {
+            transform: translateY(-4px) rotate(-45deg);
+        }
+
+        /* UNIQUE MODERN HERO SECTION */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            padding: 140px 2rem 4rem;
+            background-color: var(--pure-white);
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background:
+                radial-gradient(circle at 70% 50%, rgba(16, 185, 129, 0.08) 0%, transparent 50%);
+            z-index: 0;
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 2;
+            max-width: 1140px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2rem;
+            align-items: center;
+        }
+
+        @media (max-width: 768px) {
+            .hero-content {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .hero-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.5rem 1rem;
+            border-radius: 100px;
+            background: var(--pure-white);
+            border: 1px solid var(--border-color);
+            font-family: var(--font-label);
+            font-size: 0.85rem;
+            color: var(--gray-text);
+            margin-bottom: 1.5rem;
+            align-self: flex-start;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
+        }
+
+        .hero-badge .pulse {
+            width: 6px;
+            height: 6px;
+            border-radius: 50%;
+            background-color: var(--primary-green);
+            animation: pulse-ring 2s infinite;
+        }
+
+        @keyframes pulse-ring {
+            0% {
+                box-shadow: 0 0 0 0 rgba(16, 185, 129, 0.4);
+            }
+
+            70% {
+                box-shadow: 0 0 0 4px rgba(16, 185, 129, 0);
+            }
+
+            100% {
+                box-shadow: 0 0 0 0 rgba(16, 185, 129, 0);
+            }
+        }
+
+        .hero-title {
+            font-family: var(--font-display);
+            font-size: clamp(2.25rem, 4.5vw, 3.5rem);
+            font-weight: 700;
+            line-height: 1.1;
+            letter-spacing: -0.03em;
+            color: var(--black-text);
+            margin-bottom: 1rem;
+        }
+
+        .hero-title .text-gradient {
+            background: linear-gradient(135deg, var(--dark-green) 0%, var(--primary-green) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .hero-desc {
+            font-family: var(--font-body);
+            font-size: 1.05rem;
+            color: var(--gray-text);
+            line-height: 1.6;
+            margin-bottom: 2rem;
+        }
+
+        .hero-interactive-ddlc {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+            justify-content: flex-start;
+            margin-bottom: 2rem;
+        }
+
+        .ddlc-letters {
+            display: flex;
+            gap: 0.1rem;
+            font-family: 'Syne', sans-serif;
+            font-size: clamp(5rem, 10vw, 8rem);
+            font-weight: 800;
+            line-height: 1;
+            color: #22c55e;
+            margin-bottom: 0.25rem;
+            user-select: none;
+        }
+
+        .ddlc-letter-container {
+            position: relative;
+            display: inline-flex;
+            flex-direction: column;
+            align-items: center;
+            cursor: default;
+        }
+
+        .ddlc-letter {
+            transition: color 0.2s ease;
+        }
+
+        .ddlc-tooltip {
+            position: absolute;
+            bottom: -1rem;
+            font-family: 'Bricolage Grotesque', sans-serif;
+            font-size: 1rem;
+            color: #22c55e;
+            font-weight: 300;
+            opacity: 0;
+            transform: translateY(-5px);
+            transition: opacity 0.2s ease, transform 0.2s ease;
+            white-space: nowrap;
+            pointer-events: none;
+        }
+
+        .ddlc-letter-container:hover .ddlc-tooltip {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .ddlc-letter-container:hover .ddlc-letter {
+            color: #22c55e;
+        }
+
+        .hero-interactive-subtitle {
+            font-family: 'Bricolage Grotesque', sans-serif;
+            font-weight: 400;
+            font-size: 1.15rem;
+            color: var(--black-text);
+            text-align: left;
+            letter-spacing: 0;
+            margin-top: 0.5rem;
+        }
+
+        .hero-full-form {
+            font-family: 'DM Mono', monospace;
+            font-size: 0.85rem;
+            color: var(--gray-text);
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            margin-top: 0.5rem;
+        }
+
+        /* Navbar Animation */
+        .navbar {
+            transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        .navbar.scrolled {
+            height: 70px;
+            background: rgba(255, 255, 255, 0.85);
+            backdrop-filter: blur(20px);
+            box-shadow: 0 10px 30px -10px rgba(0, 0, 0, 0.05);
+        }
+
+        .nav-links a {
+            position: relative;
+        }
+
+        .nav-links a::after {
+            content: "";
+            position: absolute;
+            bottom: -4px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--primary-green);
+            transition: width 0.3s ease;
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+
+        .hero-product-img {
+            max-width: 100%;
+            border-radius: 20px;
+            background: transparent !important;
+            box-shadow: none !important;
+            filter: drop-shadow(0 30px 60px rgba(0, 0, 0, 0.12));
+            animation: floatImage 5s ease-in-out infinite;
+        }
+
+        @keyframes floatImage {
+            0% {
+                transform: rotate(-4deg) translateY(0);
+            }
+
+            50% {
+                transform: rotate(-4deg) translateY(-10px);
+            }
+
+            100% {
+                transform: rotate(-4deg) translateY(0);
+            }
+        }
+
+        .reveal-element {
+            opacity: 0;
+            transform: translateY(24px);
+        }
+
+        .reveal-element.visible {
+            opacity: 1 !important;
+            transform: translateY(0) !important;
+        }
+
+        body.loaded .reveal-element {
+            transition: opacity 0.55s ease, transform 0.55s ease;
+        }
+
+        .hero-visual-right {
+            display: flex;
+            justify-content: flex-end;
+            align-items: center;
+        }
+
+        /* Inspection Modules */
+        .module-card {
+            background-color: var(--pure-white);
+            border: 1px solid var(--border-color);
+            padding: 3rem 2.5rem;
+            transition: all 0.2s ease;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .module-card:hover {
+            border-color: var(--primary-green);
+            transform: translateY(-3px);
+            box-shadow: var(--card-shadow-hover);
+        }
+
+        .sub-cards-wrapper {
+            max-height: 0;
+            opacity: 0;
+            overflow: hidden;
+            transition: all 0.4s ease;
+            margin-top: 0;
+        }
+
+        .sub-cards-wrapper.expanded {
+            max-height: 600px;
+            opacity: 1;
+            margin-top: 2.5rem;
+        }
+
+        .sub-cards-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1.5rem;
+        }
+
+        .sub-card {
+            background: #ffffff;
+            border: 1px solid #e5e7eb;
+            border-radius: 14px;
+            overflow: hidden;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+            transition: all 0.4s ease;
+            text-align: left;
+        }
+
+        .sub-card-img {
+            width: 100%;
+            height: 180px;
+            object-fit: cover;
+            border-radius: 10px 10px 0 0;
+        }
+
+        .sub-card-content {
+            padding: 1.2rem;
+        }
+
+        .sub-card-title {
+            font-family: 'Syne', sans-serif;
+            font-weight: 600;
+            font-size: 1.15rem;
+            color: #22c55e;
+            margin-bottom: 0.5rem;
+        }
+
+        .sub-card-desc {
+            font-family: var(--font-body);
+            font-size: 0.9rem;
+            color: var(--gray-text);
+            line-height: 1.5;
+        }
+
+        .app-slide {
+            overflow: hidden;
+        }
+
+        .app-img {
+            transition: transform 0.4s ease;
+        }
+
+        .app-slide:hover .app-img {
+            transform: scale(1.03);
+        }
+
+        .module-icon {
+            width: 64px;
+            height: 64px;
+            background: var(--light-bg);
+            border-radius: 16px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 2rem;
+        }
+
+        .module-icon svg {
+            width: 32px;
+            height: 32px;
+            stroke: var(--primary-green);
+            stroke-width: 1.5;
+            fill: none;
+        }
+
+        .module-card-title {
+            font-family: var(--font-display);
+            font-weight: 700;
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            color: var(--black-text);
+        }
+
+        .module-card-body {
+            font-size: 1rem;
+            color: var(--gray-text);
+            line-height: 1.6;
+            margin-top: auto;
+        }
+
+        /* Features Slider */
+        .features-container {
+            position: relative;
+        }
+
+        .feat-viewport {
+            overflow: hidden;
+            width: 100%;
+            border-radius: 24px;
+            background: var(--pure-white);
+            border: 1px solid var(--border-color);
+            box-shadow: var(--card-shadow);
+        }
+
+        .feat-track {
+            display: flex;
+            transition: transform 0.6s cubic-bezier(0.25, 1, 0.5, 1);
+        }
+
+        .feat-slide {
+            width: 100%;
+            flex-shrink: 0;
+            padding: 4rem;
+            display: grid;
+            grid-template-columns: 1fr 1.2fr;
+            gap: 4rem;
+            align-items: center;
+        }
+
+        .feat-icon-area {
+            background: var(--light-bg);
+            aspect-ratio: 1;
+            border-radius: 24px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .feat-icon-area::before {
+            content: '';
+            position: absolute;
+            inset: 20px;
+            border: 1px dashed var(--border-color);
+            border-radius: 50%;
+            animation: spin 30s linear infinite;
+        }
+
+        @keyframes spin {
+            100% {
+                transform: rotate(360deg);
+            }
+        }
+
+        .feat-icon-area svg {
+            width: 120px;
+            height: 120px;
+            stroke: var(--primary-green);
+            stroke-width: 1;
+            fill: none;
+            position: relative;
+            z-index: 2;
+        }
+
+        .feat-controls {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 2rem;
+            padding: 0 1rem;
+        }
+
+        .feat-nav {
+            display: flex;
+            gap: 1rem;
+        }
+
+        .circle-btn {
+            width: 48px;
+            height: 48px;
+            border-radius: 50%;
+            background: var(--pure-white);
+            border: 1px solid var(--border-color);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .circle-btn:hover {
+            border-color: var(--primary-green);
+            color: var(--primary-green);
+        }
+
+        .dots {
+            display: flex;
+            gap: 0.5rem;
+        }
+
+        .dot {
+            width: 10px;
+            height: 10px;
+            border-radius: 5px;
+            background: #cbd5e1;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .dot.active {
+            background: var(--primary-green);
+            width: 30px;
+        }
+
+        /* Digital Forge / Timeline */
+        .timeline-wrapper {
+            position: relative;
+            margin-top: 3rem;
+        }
+
+        .timeline-line {
+            position: absolute;
+            left: 24px;
+            top: 24px;
+            bottom: 24px;
+            width: 2px;
+            background: var(--border-color);
+            z-index: 1;
+        }
+
+        .timeline-item {
+            position: relative;
+            z-index: 2;
+            display: flex;
+            gap: 2.5rem;
+            margin-bottom: 3rem;
+        }
+
+        .timeline-item:last-child {
+            margin-bottom: 0;
+        }
+
+        .tl-number {
+            width: 50px;
+            height: 50px;
+            background: var(--pure-white);
+            border: 2px solid var(--primary-green);
+            color: var(--primary-green);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-family: var(--font-display);
+            font-weight: 700;
+            font-size: 1.25rem;
+            flex-shrink: 0;
+            box-shadow: 0 0 0 8px var(--pure-white);
+        }
+
+        .tl-content {
+            background: var(--pure-white);
+            border: 1px solid var(--border-color);
+            border-radius: 16px;
+            padding: 1.5rem;
+            display: flex;
+            gap: 1.5rem;
+            align-items: center;
+            flex: 1;
+            transition: all 0.3s;
+        }
+
+        .tl-content:hover {
+            border-color: var(--primary-green);
+            box-shadow: var(--card-shadow);
+        }
+
+        .tl-img {
+            width: 140px;
+            height: 100px;
+            border-radius: 8px;
+            object-fit: cover;
+            flex-shrink: 0;
+        }
+
+        .tl-text h4 {
+            font-family: var(--font-display);
+            font-size: 1.25rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .tl-text p {
+            color: var(--gray-text);
+            font-size: 0.95rem;
+            line-height: 1.5;
+        }
+
+        .sticky-demo {
+            position: sticky;
+            top: 120px;
+            background: rgba(16, 185, 129, 0.03);
+            border: 1px solid rgba(16, 185, 129, 0.1);
+            border-radius: 24px;
+            padding: 4rem;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+        }
+
+        /* Applications Full Slider */
+        .app-slider-container {
+            width: 100%;
+            height: 600px;
+            position: relative;
+            border-radius: 24px;
+            overflow: hidden;
+            margin-top: 3rem;
+        }
+
+        .app-track {
+            display: flex;
+            height: 100%;
+            transition: transform 0.7s cubic-bezier(0.25, 1, 0.5, 1);
+        }
+
+        .app-slide {
+            min-width: 100%;
+            height: 100%;
+            position: relative;
+        }
+
+        .app-img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .app-overlay {
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(to right, rgba(15, 23, 42, 0.9), rgba(15, 23, 42, 0.2));
+            display: flex;
+            align-items: center;
+            padding: 4rem;
+        }
+
+        .app-text-block {
+            max-width: 600px;
+        }
+
+        .app-text-block h3 {
+            font-family: var(--font-display);
+            font-size: 3rem;
+            color: var(--pure-white);
+            margin-bottom: 1rem;
+        }
+
+        .app-text-block p {
+            font-size: 1.25rem;
+            color: #cbd5e1;
+            line-height: 1.6;
+        }
+
+        .app-nav {
+            position: absolute;
+            bottom: 3rem;
+            right: 3rem;
+            display: flex;
+            gap: 1rem;
+        }
+
+        .app-btn {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(8px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            color: var(--pure-white);
+        }
+
+        .app-btn:hover {
+            background: var(--pure-white);
+            color: var(--black-text);
+        }
+
+        /* List Items */
+        .premium-list {
+            list-style: none;
+            margin-top: 2rem;
+        }
+
+        .premium-list li {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin-bottom: 1.25rem;
+            font-size: 1.125rem;
+            font-weight: 500;
+        }
+
+        .check-circle {
+            width: 24px;
+            height: 24px;
+            background: var(--primary-green);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            flex-shrink: 0;
+        }
+
+        /* Form */
+        .form-card {
+            background: var(--pure-white);
+            padding: 3rem;
+            border-radius: 24px;
+            border: 1px solid var(--border-color);
+            box-shadow: var(--card-shadow);
+        }
+
+        .input-wrap {
+            margin-bottom: 1.5rem;
+        }
+
+        .input-wrap label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-family: var(--font-label);
+            font-size: 0.875rem;
+            font-weight: 600;
+            color: var(--black-text);
+        }
+
+        .input-field {
+            width: 100%;
+            padding: 1rem;
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            font-family: var(--font-body);
+            font-size: 1rem;
+            background: var(--light-bg);
+            transition: all 0.2s;
+        }
+
+        .input-field:focus {
+            outline: none;
+            border-color: var(--primary-green);
+            background: var(--pure-white);
+            box-shadow: 0 0 0 4px rgba(16, 185, 129, 0.1);
+        }
+
+        /* Categorized Footer Demo Style */
+        .footer {
+            padding: 5rem 0 2rem;
+            border-top: 1px solid var(--border-color);
+            background-color: var(--pure-white);
+        }
+
+        .footer-top {
+            display: grid;
+            grid-template-columns: 2fr 1fr 1fr 1fr;
+            gap: 4rem;
+            margin-bottom: 4rem;
+        }
+
+        .footer-brand .logo {
+            font-size: 2rem;
+            margin-bottom: 1.5rem;
+            display: block;
+        }
+
+        .footer-address {
+            font-family: var(--font-body);
+            color: var(--gray-text);
+            line-height: 1.6;
+            margin-bottom: 2rem;
+            font-size: 0.95rem;
+        }
+
+        .footer-socials {
+            display: flex;
+            gap: 1rem;
+        }
+
+        .footer-social-btn {
+            width: 40px;
+            height: 40px;
+            border-radius: 8px;
+            background: var(--light-bg);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--black-text);
+            transition: all 0.2s;
+        }
+
+        .footer-social-btn:hover {
+            background: var(--primary-green);
+            color: var(--pure-white);
+            transform: translateY(-2px);
+        }
+
+        .footer-heading {
+            font-family: var(--font-label);
+            font-size: 0.875rem;
+            font-weight: 600;
+            color: var(--black-text);
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            margin-bottom: 1.5rem;
+        }
+
+        .footer-list {
+            list-style: none;
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+
+        .footer-list a {
+            font-family: var(--font-body);
+            font-size: 0.95rem;
+            color: var(--gray-text);
+            transition: color 0.2s;
+        }
+
+        .footer-list a:hover {
+            color: var(--primary-green);
+        }
+
+        .footer-bottom {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding-top: 2rem;
+            border-top: 1px solid var(--border-color);
+            font-family: var(--font-body);
+            font-size: 0.875rem;
+            color: var(--gray-text);
+        }
+
+        /* --- RESPONSIVE MEDIA QUERIES --- */
+
+        @media (max-width: 1024px) {
+            .grid-2,
+            .feat-slide {
+                grid-template-columns: 1fr;
+                gap: 4rem;
+            }
+            .feat-icon-area { display: none; }
+            .hero-visual-right { justify-content: center; margin-top: 3rem; }
+            .hero-content { grid-template-columns: 1fr; }
+        }
+
+        @media (max-width: 768px) {
+            .grid-3 { grid-template-columns: 1fr; }
+            .sub-cards-grid { grid-template-columns: 1fr; }
+            .section { padding: 5rem 0; }
+            .large-heading { font-size: 2.5rem; }
+            
+            .navbar { height: 70px; }
+            .mobile-menu-btn { display: block; }
+
+            .nav-links {
+                position: fixed;
+                top: 0;
+                right: -100%;
+                width: 100%;
+                height: 100vh;
+                background: rgba(255, 255, 255, 0.98);
+                backdrop-filter: blur(20px);
+                flex-direction: column;
+                justify-content: center;
+                align-items: center;
+                gap: 2rem;
+                transition: all 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+                z-index: 1500;
+                padding: 2rem;
+            }
+
+            .nav-links.active {
+                right: 0;
+            }
+
+            .nav-links a {
+                font-size: 2rem;
+                font-family: 'Syne', sans-serif;
+                font-weight: 700;
+                opacity: 0;
+                transform: translateY(20px);
+                transition: all 0.4s ease;
+            }
+
+            .nav-links.active a {
+                opacity: 1;
+                transform: translateY(0);
+            }
+
+            .nav-links.active a:nth-child(1) { transition-delay: 0.1s; }
+            .nav-links.active a:nth-child(2) { transition-delay: 0.2s; }
+            .nav-links.active a:nth-child(3) { transition-delay: 0.3s; }
+            .nav-links.active a:nth-child(4) { transition-delay: 0.4s; }
+            .nav-links.active a:nth-child(5) { transition-delay: 0.5s; }
+
+            .hero { padding: 140px 1.5rem 5rem; text-align: center; }
+            .hero-content { align-items: center; }
+            .hero-interactive-ddlc { align-items: center; }
+            .ddlc-letters { font-size: 5rem; }
+            .hero-product-img { max-width: 80%; transform: rotate(0); }
+            
+            .sticky-demo { position: relative; width: 100%; top: 0; margin-top: 4rem; }
+            .timeline-item { flex-direction: column; align-items: center; text-align: center; }
+            .timeline-line { left: 50%; height: 100%; }
+            .tl-number { margin: 0 auto; }
+        }
+
+        @media (max-width: 480px) {
+            .footer-top {
+                grid-template-columns: 1fr;
+            }
+
+            .footer-bottom {
+                flex-direction: column;
+                gap: 1rem;
+                text-align: center;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- Professional Navbar -->
+    <nav class="navbar">
+        <div class="container nav-container">
+            <a href="#home" class="logo">ddlc<span>.</span></a>
+
+            <div class="nav-links" id="navLinks">
+                <a href="#home">Home</a>
+                <a href="#what-is">Platform</a>
+                <a href="#features">Capabilities</a>
+                <a href="#deploy">Deployment</a>
+                <a href="#applications">Industries</a>
+            </div>
+
+            <div class="nav-links" style="gap: 1rem; display:none;" id="navActions">
+                <a href="#contact" class="btn" style="padding: 0.6rem 1.5rem; font-size: 0.9rem;">Contact Us</a>
+            </div>
+
+            <button class="mobile-menu-btn" id="menuBtn">
+                <span class="hamburger-line line-1"></span>
+                <span class="hamburger-line line-2"></span>
+            </button>
+        </div>
+    </nav>
+
+    <section id="home" class="hero">
+        <div class="container hero-content">
+            <div style="display:flex; flex-direction:column; align-items:flex-start;" class="reveal-element">
+                <div class="hero-interactive-ddlc">
+                    <div class="ddlc-letters">
+                        <div class="ddlc-letter-container">
+                            <span class="ddlc-letter">D</span>
+                            <span class="ddlc-tooltip">Data</span>
+                        </div>
+                        <div class="ddlc-letter-container">
+                            <span class="ddlc-letter">D</span>
+                            <span class="ddlc-tooltip">Driven</span>
+                        </div>
+                        <div class="ddlc-letter-container">
+                            <span class="ddlc-letter">L</span>
+                            <span class="ddlc-tooltip">Logic</span>
+                        </div>
+                        <div class="ddlc-letter-container">
+                            <span class="ddlc-letter">C</span>
+                            <span class="ddlc-tooltip">Controllers</span>
+                        </div>
+                    </div>
+                    <div class="hero-interactive-subtitle">
+                        The intelligent edge for modern automation.
+                    </div>
+                    <div class="hero-full-form">
+                        Data Driven Logic Controllers
+                    </div>
+                </div>
+            </div>
+
+            <div class="hero-visual-right reveal-element">
+                <img src="https://ddlc-website-ecru.vercel.app/ddlc__1_.png" alt="DDLC Hardware"
+                    class="hero-product-img">
+            </div>
+        </div>
+    </section>
+
+    <!-- Edge Inspection Modules -->
+    <section class="section bg-light reveal-element visible">
+        <div class="container">
+            <div style="text-align: center; max-width: 800px; margin: 0 auto 3rem;">
+                <span class="section-label">Use Cases</span>
+                <h2 class="large-heading">Flawless execution through perfect perception</h2>
+                <p class="body-text">DDLC modules sit at the intersection of AI vision and hardcore mechanical control,
+                    offering unparalleled inline inspection capabilities.</p>
+            </div>
+
+            <div class="grid-3">
+                <div class="module-card rounded-24" id="surface-card-trigger" onmouseenter="showSubCards()"
+                    onmouseleave="hideSubCards()">
+                    <div class="module-icon">
+                        <svg viewBox="0 0 24 24">
+                            <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" />
+                        </svg>
+                    </div>
+                    <h3 class="module-card-title">Surface Inspection</h3>
+                    <p class="module-card-body">Identify microscopic cosmetic defects and texture anomalies in real-time
+                        using high-resolution natural vision systems integrated directly into the control loop.</p>
+                </div>
+                <div class="module-card rounded-24">
+                    <div class="module-icon">
+                        <svg viewBox="0 0 24 24">
+                            <path
+                                d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z" />
+                        </svg>
+                    </div>
+                    <h3 class="module-card-title">Child Part Assembly</h3>
+                    <p class="module-card-body">Verify individual sub-components during assembly to ensure zero-defect
+                        integrity before final integration. Catch errors before they become costly failures.</p>
+                </div>
+                <div class="module-card rounded-24">
+                    <div class="module-icon">
+                        <svg viewBox="0 0 24 24">
+                            <circle cx="12" cy="12" r="10" />
+                            <line x1="12" y1="8" x2="12" y2="16" />
+                            <line x1="8" y1="12" x2="16" y2="12" />
+                        </svg>
+                    </div>
+                    <h3 class="module-card-title">Automated Metrology</h3>
+                    <p class="module-card-body">Measure geometric tolerances with sub-millimeter precision at the edge.
+                        No manual measurement, no delays, and absolute elimination of human error.</p>
+                </div>
+            </div>
+
+            <div class="sub-cards-wrapper" id="sub-cards-surface" onmouseenter="showSubCards()"
+                onmouseleave="hideSubCards()">
+                <div class="sub-cards-grid">
+                    <div class="sub-card">
+                        <img src="https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=600&q=80"
+                            class="sub-card-img" alt="Bottle Inspection">
+                        <div class="sub-card-content">
+                            <h4 class="sub-card-title">Bottle Inspection</h4>
+                            <p class="sub-card-desc">AI vision detects cracks, fill levels and cap integrity at production line speeds.</p>
+                        </div>
+                    </div>
+                    <div class="sub-card">
+                        <img src="https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?w=600&q=80"
+                            class="sub-card-img" alt="Label Inspection">
+                        <div class="sub-card-content">
+                            <h4 class="sub-card-title">Label Inspection</h4>
+                            <p class="sub-card-desc">Automatic alignment and barcode verification across mixed SKUs.</p>
+                        </div>
+                    </div>
+                    <div class="sub-card">
+                        <img src="https://images.unsplash.com/photo-1558961363-fa8fdf82db35?w=600&q=80"
+                            class="sub-card-img" alt="Biscuit Inspection">
+                        <div class="sub-card-content">
+                            <h4 class="sub-card-title">Biscuit Inspection</h4>
+                            <p class="sub-card-desc">Detect broken pieces and foreign objects with sub-millimeter precision.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Platform Understanding -->
+    <section id="what-is" class="section">
+        <div class="container grid-2">
+            <div>
+                <span class="section-label">The Shift</span>
+                <h2 class="large-heading">A paradigm shift in control engineering</h2>
+                <p class="body-text">Unlike traditional control systems that rely strictly on fixed logic rules, DDLCs
+                    leverage the power of continuous data streams and artificial intelligence.</p>
+                <p class="body-text">Sitting invisibly atop Programmable Logic Controllers (PLCs), DDLCs act as
+                    intelligent orchestrators. They constantly analyze vast amounts of data from multiple structural
+                    sources, dynamically overriding and optimizing system behavior instantly to prevent faults.</p>
+            </div>
+            <div class="visual-card"
+                style="background:var(--pure-white); border:1px solid var(--border-color); border-radius:32px; padding:3rem; box-shadow:var(--card-shadow); display:flex; align-items:center; justify-content:center;">
+                <img src="ddlc_img1.jpg" alt="DDLC Engineering Concept" class="rounded-24 branded-img"
+                    onerror="this.onerror=null; this.src='https://picsum.photos/seed/ddlcx1/800/600';"
+                    style="max-width:100%; border-radius:16px;">
+            </div>
+        </div>
+    </section>
+
+    <!-- Features Custom Slider -->
+    <section id="features" class="section bg-light">
+        <div class="container">
+            <span class="section-label">Core Capabilities</span>
+            <h2 class="large-heading">Engineered for extreme adaptability</h2>
+
+            <div class="features-container mt-4">
+                <div class="feat-viewport">
+                    <div class="feat-track" id="featTrack">
+
+                        <!-- Slide 1 -->
+                        <div class="feat-slide">
+                            <div class="feat-icon-area">
+                                <svg viewBox="0 0 24 24">
+                                    <rect x="2" y="2" width="20" height="8" rx="2" ry="2" />
+                                    <rect x="2" y="14" width="20" height="8" rx="2" ry="2" />
+                                    <line x1="6" y1="6" x2="6.01" y2="6" />
+                                    <line x1="6" y1="18" x2="6.01" y2="18" />
+                                </svg>
+                            </div>
+                            <div>
+                                <h3 class="large-heading" style="font-size: 2.5rem;">Data Agnostic Integration</h3>
+                                <p class="body-text">DDLCs are highly versatile integration layers. They effortlessly
+                                    process a wide spectrum of data types simultaneously, including raw sensor readings,
+                                    high-frame-rate images, spatial audio, and localized structured plant data.</p>
+                            </div>
+                        </div>
+
+                        <!-- Slide 2 -->
+                        <div class="feat-slide">
+                            <div class="feat-icon-area">
+                                <svg viewBox="0 0 24 24">
+                                    <circle cx="12" cy="12" r="10" />
+                                    <polyline points="12 6 12 12 16 14" />
+                                </svg>
+                            </div>
+                            <div>
+                                <h3 class="large-heading" style="font-size: 2.5rem;">Real-Time AI Inference</h3>
+                                <p class="body-text">By pushing machine learning to the deep edge, DDLCs learn from
+                                    real-world physical anomalies. They execute informed operational overrides in
+                                    real-time, boosting yield quality and preventing mechanical downtime.</p>
+                            </div>
+                        </div>
+
+                        <!-- Slide 3 -->
+                        <div class="feat-slide">
+                            <div class="feat-icon-area">
+                                <svg viewBox="0 0 24 24">
+                                    <path
+                                        d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z" />
+                                    <polyline points="3.27 6.96 12 12.01 20.73 6.96" />
+                                    <line x1="12" y1="22.08" x2="12" y2="12" />
+                                </svg>
+                            </div>
+                            <div>
+                                <h3 class="large-heading" style="font-size: 2.5rem;">Multi-Modal ML Engine</h3>
+                                <p class="body-text">Standard logic looks at one sensor. Our Multi-Modal engine offers a
+                                    holistic view of mechanical dynamics by evaluating sight, sound, and pressure inputs
+                                    concurrently, forming a complete intelligence net.</p>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+
+                <div class="feat-controls">
+                    <div class="dots" id="featDots">
+                        <div class="dot active" onclick="goToFeatSlide(0)"></div>
+                        <div class="dot" onclick="goToFeatSlide(1)"></div>
+                        <div class="dot" onclick="goToFeatSlide(2)"></div>
+                    </div>
+                    <div class="feat-nav">
+                        <button class="circle-btn" onclick="prevFeatSlide()"><svg width="24" height="24"
+                                viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                                <path stroke-width="2" d="M15 18l-6-6 6-6" />
+                            </svg></button>
+                        <button class="circle-btn" onclick="nextFeatSlide()"><svg width="24" height="24"
+                                viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                                <path stroke-width="2" d="M9 18l6-6-6-6" />
+                            </svg></button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- How to Deploy / Digital Forge -->
+    <section id="deploy" class="section">
+        <div class="container grid-2" style="align-items: start;">
+            <div>
+                <span class="section-label">The Digital Forge</span>
+                <h2 class="large-heading">Deploy DDLC in 5 verified steps.</h2>
+
+                <div class="timeline-wrapper">
+                    <div class="timeline-line"></div>
+
+                    <div class="timeline-item">
+                        <div class="tl-number">1</div>
+                        <div class="tl-content">
+                            <img src="deploy1.jpg" class="tl-img branded-img" alt="Capture Phase"
+                                onerror="this.onerror=null; this.src='https://picsum.photos/seed/ddlcsensor1/400/300';">
+                            <div class="tl-text">
+                                <h4>Capture</h4>
+                                <p>Extract raw pipeline data straight from existing floor sensors, PLCs, and connected
+                                    hardware endpoints.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="timeline-item">
+                        <div class="tl-number">2</div>
+                        <div class="tl-content">
+                            <img src="deploy2.jpg" class="tl-img branded-img" alt="Secure Upload"
+                                onerror="this.onerror=null; this.src='https://picsum.photos/seed/ddlccloud2/400/300';">
+                            <div class="tl-text">
+                                <h4>Synchronize</h4>
+                                <p>Upload high-frequency data to the DDLC cloud ecosystem utilizing military-grade
+                                    encrypted pipelines.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="timeline-item">
+                        <div class="tl-number">3</div>
+                        <div class="tl-content">
+                            <img src="deploy3.jpg" class="tl-img branded-img" alt="Train Model"
+                                onerror="this.onerror=null; this.src='https://picsum.photos/seed/ddlctrain3/400/300';">
+                            <div class="tl-text">
+                                <h4>Train AI</h4>
+                                <p>Define specific mechanical use cases and let our forge automatically map and instruct
+                                    the neural weights.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="timeline-item">
+                        <div class="tl-number">4</div>
+                        <div class="tl-content">
+                            <img src="deploy4.jpg" class="tl-img branded-img" alt="Verify"
+                                onerror="this.onerror=null; this.src='https://picsum.photos/seed/ddlcverify4/400/300';">
+                            <div class="tl-text">
+                                <h4>Simulate</h4>
+                                <p>Test computational accuracy in sandboxed twins using historical failure data prior to
+                                    live deployment.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="timeline-item">
+                        <div class="tl-number">5</div>
+                        <div class="tl-content">
+                            <img src="deploy5.jpg" class="tl-img branded-img" alt="Hardware Deploy"
+                                onerror="this.onerror=null; this.src='https://picsum.photos/seed/ddlchardware5/400/300';">
+                            <div class="tl-text">
+                                <h4>Edge Actuation</h4>
+                                <p>Flash the confirmed intelligence model natively onto physical DDLC chassis attached
+                                    to your line.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+            <div class="sticky-demo">
+                <img src="ddlc__1_.png" alt="DDLC Render"
+                    onerror="this.src='https://placehold.co/400x400/f8fafc/10b981?text=DDLC+Unit'"
+                    style="max-width:300px; margin-bottom:2rem;">
+                <h3
+                    style="font-family:var(--font-display); font-size:1.5rem; margin-bottom:1rem; color:var(--black-text);">
+                    Ready for deployment</h3>
+                <p class="body-text" style="font-size:1rem; margin-bottom:2rem;">Our hardware is specifically engineered
+                    to survive extreme factory environments while running massive ML models.</p>
+                <a href="#contact" class="btn" style="width:100%;">Talk to an Engineer</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Industries / Applications Slider -->
+    <section id="applications" class="section bg-light" style="padding-bottom: 4rem;">
+        <div class="container">
+            <span class="section-label">Industries</span>
+            <h2 class="large-heading">Versatility across sectors</h2>
+        </div>
+
+        <div class="container" style="max-width: 1400px; padding: 0 1rem;">
+            <div class="app-slider-container">
+                <div class="app-track" id="appTrack">
+
+                    <div class="app-slide">
+                        <img src="sliderimg1.jpg" class="app-img branded-img" alt="Manufacturing Factory"
+                            onerror="this.onerror=null; this.src='https://picsum.photos/seed/mfg1x/1600/900';">
+                        <div class="app-overlay">
+                            <div class="app-text-block">
+                                <h3>Smart Manufacturing</h3>
+                                <p>Automate cosmetic inspections, predict tool degradation, and optimize assembly
+                                    pipelines using visual and acoustic signatures.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="app-slide">
+                        <img src="sliderimg2.jpg" class="app-img branded-img" alt="Healthcare Devices"
+                            onerror="this.onerror=null; this.src='https://picsum.photos/seed/health1x/1600/900';">
+                        <div class="app-overlay">
+                            <div class="app-text-block">
+                                <h3>Healthcare Innovation</h3>
+                                <p>Zero-fault tolerance for medical device production lines, ensuring every assembled
+                                    component passes rigorous visual compliance checks instantly.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="app-slide">
+                        <img src="sliderimg3.jpg" class="app-img branded-img" alt="Logistics Hub"
+                            onerror="this.onerror=null; this.src='https://picsum.photos/seed/trans1x/1600/900';">
+                        <div class="app-overlay">
+                            <div class="app-text-block">
+                                <h3>Logistics & Transport</h3>
+                                <p>Intelligent routing mechanisms and automated package visual sorting logic running
+                                    entirely at the edge without cloud dependency.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+
+                <div class="app-nav">
+                    <button class="circle-btn app-btn" onclick="prevAppSlide()"><svg width="24" height="24"
+                            viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                            <path stroke-width="2" d="M15 18l-6-6 6-6" />
+                        </svg></button>
+                    <button class="circle-btn app-btn" onclick="nextAppSlide()"><svg width="24" height="24"
+                            viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                            <path stroke-width="2" d="M9 18l6-6-6-6" />
+                        </svg></button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Why Us & Contact Combined Block -->
+    <section id="why-us" class="section">
+        <div class="container grid-2">
+
+            <!-- Left Info -->
+            <div>
+                <span class="section-label">Trust The Pioneers</span>
+                <h2 class="large-heading">We architect Industry 4.0</h2>
+                <p class="body-text">We are committed to delivering deeply technical AI control solutions. We don't just
+                    sell hardware; we map your mechanical logic and evolve it with intelligent edge computing.</p>
+
+                <ul class="premium-list">
+                    <li>
+                        <div class="check-circle"><svg width="14" height="14" viewBox="0 0 24 24" fill="none"
+                                stroke="currentColor" stroke-width="3">
+                                <path d="M20 6L9 17l-5-5" />
+                            </svg></div> Deep Domain Expertise in PLCs
+                    </li>
+                    <li>
+                        <div class="check-circle"><svg width="14" height="14" viewBox="0 0 24 24" fill="none"
+                                stroke="currentColor" stroke-width="3">
+                                <path d="M20 6L9 17l-5-5" />
+                            </svg></div> Proprietary Edge Vision Processing
+                    </li>
+                    <li>
+                        <div class="check-circle"><svg width="14" height="14" viewBox="0 0 24 24" fill="none"
+                                stroke="currentColor" stroke-width="3">
+                                <path d="M20 6L9 17l-5-5" />
+                            </svg></div> Air-gapped Security Architecture
+                    </li>
+                </ul>
+            </div>
+
+            <!-- Right Form -->
+            <div id="contact" class="form-card">
+                <h3
+                    style="font-family:var(--font-display); font-size:1.75rem; margin-bottom:0.5rem; color:var(--black-text);">
+                    Schedule Integration Call</h3>
+                <p style="color:var(--gray-text); margin-bottom:2rem;">Speak directly with a DDLC systems architect.</p>
+
+                <form onsubmit="event.preventDefault();">
+                    <div class="input-wrap">
+                        <label>Full Name</label>
+                        <input type="text" class="input-field" placeholder="John Doe" required>
+                    </div>
+                    <div class="input-wrap">
+                        <label>Work Email</label>
+                        <input type="email" class="input-field" placeholder="john@company.com" required>
+                    </div>
+                    <div class="input-wrap">
+                        <label>Preferred Time</label>
+                        <input type="datetime-local" class="input-field" required>
+                    </div>
+                    <button type="submit" class="btn" style="width:100%; margin-top:1rem;">Book Technical Demo</button>
+                </form>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- EXACT DEMO CATEGORIZED FOOTER -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-top">
+                <div class="footer-brand">
+                    <a href="#home" class="logo">ddlc<span>.</span></a>
+                    <p class="footer-address">
+                        DDLC Technologies Pvt. Ltd.<br>
+                        91Springboard, 7th Block<br>
+                        Koramangala, Bangalore<br>
+                        Karnataka, India 560095
+                    </p>
+                    <div class="footer-socials">
+                        <a href="#" class="footer-social-btn" aria-label="LinkedIn"><svg width="20" height="20"
+                                viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path
+                                    d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z" />
+                                <rect x="2" y="9" width="4" height="12" />
+                                <circle cx="4" cy="4" r="2" />
+                            </svg></a>
+                        <a href="#" class="footer-social-btn" aria-label="WhatsApp"><svg width="20" height="20"
+                                viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path
+                                    d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z" />
+                            </svg></a>
+                        <a href="#" class="footer-social-btn" aria-label="Twitter"><svg width="20" height="20"
+                                viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path
+                                    d="M22 4s-.7 2.1-2 3.4c1.6 10-9.4 17.3-18 11.6 2.2.1 4.4-.6 6-2C3 15.5.5 9.6 3 5c2.2 2.6 5.6 4.1 9 4-.9-4.2 4-6.6 7-3.8 1.1 0 3-1.2 3-1.2z" />
+                            </svg></a>
+                    </div>
+                </div>
+
+                <div>
+                    <h4 class="footer-heading">Solutions</h4>
+                    <ul class="footer-list">
+                        <li><a href="#">Surface Inspection</a></li>
+                        <li><a href="#">Child Part Assembly</a></li>
+                        <li><a href="#">Automated Metrology</a></li>
+                        <li><a href="#">Hardware Modules</a></li>
+                        <li><a href="#">Software Platform</a></li>
+                    </ul>
+                </div>
+
+                <div>
+                    <h4 class="footer-heading">Rankings</h4>
+                    <ul class="footer-list">
+                        <li><a href="#">Manufacturing AI</a></li>
+                        <li><a href="#">Edge Compute</a></li>
+                        <li><a href="#">PLC Integrations</a></li>
+                        <li><a href="#">Case Studies</a></li>
+                    </ul>
+                </div>
+
+                <div>
+                    <h4 class="footer-heading">Free Tools</h4>
+                    <ul class="footer-list">
+                        <li><a href="#">ROI Calculator</a></li>
+                        <li><a href="#">Latency Tester</a></li>
+                        <li><a href="#">Integration Docs</a></li>
+                        <li><a href="#">API Reference</a></li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="footer-bottom">
+                <div>&copy; 2026 DDLC Technologies Pvt. Ltd. All rights reserved.</div>
+                <div style="display:flex; gap:1.5rem;">
+                    <a href="#">Privacy Policy</a>
+                    <a href="#">Terms of Service</a>
+                    <a href="#">Legal</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Interactive Scripts -->
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
+            document.body.classList.add('loaded');
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach((entry, index) => {
+                    if (entry.isIntersecting) {
+                        setTimeout(() => {
+                            entry.target.classList.add('visible');
+                        }, index * 100);
+                    }
+                });
+            }, { threshold: 0.1, rootMargin: '0px 0px -50px 0px' });
+
+            document.querySelectorAll('.reveal-element, .section, .module-card, .feat-slide, .timeline-item').forEach((el) => {
+                if (!el.classList.contains('reveal-element')) {
+                    el.classList.add('reveal-element');
+                }
+                observer.observe(el);
+            });
+
+            // Count observer for step numbers
+            const countObserver = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        const target = entry.target;
+                        if (!target.hasAttribute('data-counted')) {
+                            target.setAttribute('data-counted', 'true');
+                            const targetValue = parseInt(target.innerText) || parseInt(target.getAttribute('data-target') || '1');
+                            target.innerText = "0";
+                            let count = 0;
+                            const interval = setInterval(() => {
+                                if (count < targetValue) {
+                                    count++;
+                                    target.innerText = count.toString();
+                                } else {
+                                    clearInterval(interval);
+                                }
+                            }, 50);
+                        }
+                    }
+                });
+            }, { threshold: 0.5 });
+
+            document.querySelectorAll('.tl-number').forEach(el => countObserver.observe(el));
+        });
+
+        // Navbar Scroll Effect
+        window.addEventListener("scroll", () => {
+            const nav = document.querySelector(".navbar");
+            if (window.scrollY > 20) {
+                nav.classList.add("scrolled");
+            } else {
+                nav.classList.remove("scrolled");
+            }
+        });
+
+        // Surface Inspection Hover Logic
+        let subCardsTimeout;
+        const subCards = document.getElementById("sub-cards-surface");
+        
+        function showSubCards() {
+            clearTimeout(subCardsTimeout);
+            subCards.classList.add("expanded");
+        }
+
+        function hideSubCards() {
+            subCardsTimeout = setTimeout(() => {
+                subCards.classList.remove("expanded");
+            }, 300);
+        }
+
+        // Magnetic Effect for Buttons & Logo
+        const magneticElements = document.querySelectorAll('.btn, .logo');
+        magneticElements.forEach(el => {
+            el.addEventListener('mousemove', (e) => {
+                const rect = el.getBoundingClientRect();
+                const x = e.clientX - rect.left - rect.width / 2;
+                const y = e.clientY - rect.top - rect.height / 2;
+                el.style.transform = `translate(${x * 0.2}px, ${y * 0.2}px) scale(1.02)`;
+            });
+            el.addEventListener('mouseleave', () => {
+                el.style.transform = '';
+            });
+        });
+
+        // Mobile Menu
+        const menuBtn = document.getElementById('menuBtn');
+        const navLinks = document.getElementById('navLinks');
+        const navActions = document.getElementById('navActions');
+
+        menuBtn.addEventListener('click', () => {
+            menuBtn.classList.toggle('active');
+            navLinks.classList.toggle('active');
+            document.body.style.overflow = navLinks.classList.contains('active') ? 'hidden' : '';
+        });
+
+        navLinks.querySelectorAll('a').forEach(link => {
+            link.addEventListener('click', () => {
+                menuBtn.classList.remove('active');
+                navLinks.classList.remove('active');
+                document.body.style.overflow = '';
+            });
+        });
+
+        // Feature Slider
+        let currentFeat = 0;
+        const totalFeat = 3; // Updated to 3 robust slides
+        function updateFeat() {
+            document.getElementById('featTrack').style.transform = `translateX(-${currentFeat * 100}%)`;
+            document.querySelectorAll('#featDots .dot').forEach((d, i) => {
+                d.classList.toggle('active', i === currentFeat);
+            });
+        }
+        function goToFeatSlide(i) { currentFeat = i; updateFeat(); resetFeatTimer(); }
+        function nextFeatSlide() { currentFeat = (currentFeat + 1) % totalFeat; updateFeat(); resetFeatTimer(); }
+        function prevFeatSlide() { currentFeat = (currentFeat - 1 + totalFeat) % totalFeat; updateFeat(); resetFeatTimer(); }
+
+        let featInt = setInterval(nextFeatSlide, 5000);
+        function resetFeatTimer() { clearInterval(featInt); featInt = setInterval(nextFeatSlide, 5000); }
+
+        // Application Slider
+        let currentApp = 0;
+        const totalApp = 3;
+        function updateApp() {
+            document.getElementById('appTrack').style.transform = `translateX(-${currentApp * 100}%)`;
+        }
+        function nextAppSlide() { currentApp = (currentApp + 1) % totalApp; updateApp(); resetAppTimer(); }
+        function prevAppSlide() { currentApp = (currentApp - 1 + totalApp) % totalApp; updateApp(); resetAppTimer(); }
+
+        let appInt = setInterval(nextAppSlide, 6000);
+        function resetAppTimer() { clearInterval(appInt); appInt = setInterval(nextAppSlide, 6000); }
+    </script>
+</body>
+
+</html>
