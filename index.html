@@ -38,9 +38,9 @@
             --card-shadow-hover: 0 20px 40px -10px rgba(16, 185, 129, 0.15);
 
             /* Typography */
-            --font-display: 'Plus Jakarta Sans', sans-serif;
+            --font-display: 'Inter', sans-serif;
             --font-body: 'Inter', sans-serif;
-            --font-label: 'JetBrains Mono', monospace;
+            --font-label: 'Inter', sans-serif;
         }
 
         * {
@@ -70,9 +70,9 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background-image: 
-                linear-gradient(to right, rgba(0,0,0,0.03) 1px, transparent 1px),
-                linear-gradient(to bottom, rgba(0,0,0,0.03) 1px, transparent 1px);
+            background-image:
+                linear-gradient(to right, rgba(0, 0, 0, 0.03) 1px, transparent 1px),
+                linear-gradient(to bottom, rgba(0, 0, 0, 0.03) 1px, transparent 1px);
             background-size: 60px 60px;
             pointer-events: none;
             z-index: -1;
@@ -103,12 +103,13 @@
         }
 
         /* Typography Utilities */
-        
+
         .large-heading {
             position: relative;
             display: inline-block;
             padding-bottom: 0.5rem;
         }
+
         .heading-underline {
             position: absolute;
             bottom: 0;
@@ -151,15 +152,23 @@
             margin-bottom: 1.5rem;
         }
 
-        
+
         .typewriter-cursor {
             font-weight: 800;
             color: #22c55e;
             animation: blinkCursor 0.7s step-end infinite;
         }
+
         @keyframes blinkCursor {
-            0%, 100% { opacity: 1; }
-            50% { opacity: 0; }
+
+            0%,
+            100% {
+                opacity: 1;
+            }
+
+            50% {
+                opacity: 0;
+            }
         }
 
         /* Layout */
@@ -168,10 +177,11 @@
             margin: 0 auto;
             padding: 0 2rem;
         }
+
         .section {
             padding: 8rem 0;
             position: relative;
-            border-bottom: 1px solid rgba(34,197,94,0.12);
+            border-bottom: 1px solid rgba(34, 197, 94, 0.12);
         }
 
         .section:nth-of-type(odd) {
@@ -199,12 +209,13 @@
             gap: 1.5rem;
         }
 
-        
+
         .reveal-image-container {
             position: relative;
             overflow: hidden;
             display: inline-block;
         }
+
         .reveal-overlay {
             position: absolute;
             inset: 0;
@@ -213,11 +224,19 @@
             clip-path: inset(0 0 0 0);
         }
 
-        
+
         @keyframes heroFloat {
-            0% { transform: translateY(0px); }
-            50% { transform: translateY(-15px); }
-            100% { transform: translateY(0px); }
+            0% {
+                transform: translateY(0px);
+            }
+
+            50% {
+                transform: translateY(-15px);
+            }
+
+            100% {
+                transform: translateY(0px);
+            }
         }
 
         /* Utilities */
@@ -253,16 +272,16 @@
         }
 
         .btn-outline {
-            background: rgba(34,197,94,0.08);
+            background: rgba(34, 197, 94, 0.08);
             backdrop-filter: blur(10px);
             -webkit-backdrop-filter: blur(10px);
-            border: 1px solid rgba(34,197,94,0.3);
+            border: 1px solid rgba(34, 197, 94, 0.3);
             color: var(--primary-green);
         }
 
         .btn-outline:hover {
-            background: rgba(34,197,94,0.15);
-            border-color: rgba(34,197,94,0.4);
+            background: rgba(34, 197, 94, 0.15);
+            border-color: rgba(34, 197, 94, 0.4);
             color: var(--primary-green);
             box-shadow: none;
         }
@@ -324,17 +343,18 @@
             filter: grayscale(40%) sepia(0%) hue-rotate(100deg);
         }
 
-        
+
         .marquee-wrapper {
             width: 100%;
             overflow: hidden;
             background: var(--pure-white);
-            border-top: 1px solid rgba(34,197,94,0.1);
-            border-bottom: 1px solid rgba(34,197,94,0.1);
+            border-top: 1px solid rgba(34, 197, 94, 0.1);
+            border-bottom: 1px solid rgba(34, 197, 94, 0.1);
             padding: 1rem 0;
             white-space: nowrap;
             position: relative;
         }
+
         .marquee-content {
             display: inline-block;
             animation: marquee 20s linear infinite;
@@ -344,9 +364,15 @@
             text-transform: uppercase;
             letter-spacing: 0.1em;
         }
+
         @keyframes marquee {
-            0% { transform: translateX(0); }
-            100% { transform: translateX(-50%); }
+            0% {
+                transform: translateX(0);
+            }
+
+            100% {
+                transform: translateX(-50%);
+            }
         }
 
         /* Navigation */
@@ -355,10 +381,10 @@
             top: 0;
             left: 0;
             right: 0;
-            background: rgba(255,255,255,0.72);
+            background: rgba(255, 255, 255, 0.72);
             backdrop-filter: blur(20px) saturate(180%);
             -webkit-backdrop-filter: blur(20px) saturate(180%);
-            border-bottom: 1px solid rgba(255,255,255,0.4);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.4);
             z-index: 1000;
             height: 64px;
             display: flex;
@@ -423,17 +449,23 @@
             transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
         }
 
-        .line-1 { top: 10px; }
-        .line-2 { top: 18px; }
+        .line-1 {
+            top: 10px;
+        }
+
+        .line-2 {
+            top: 18px;
+        }
 
         .mobile-menu-btn.active .line-1 {
             transform: translateY(4px) rotate(45deg);
         }
+
         .mobile-menu-btn.active .line-2 {
             transform: translateY(-4px) rotate(-45deg);
         }
 
-        
+
         /* Particles */
         .hero-particles {
             position: absolute;
@@ -442,17 +474,34 @@
             pointer-events: none;
             overflow: hidden;
         }
+
         .particle {
             position: absolute;
-            background: rgba(34,197,94,0.15);
+            background: rgba(34, 197, 94, 0.15);
             border-radius: 50%;
             animation: floatParticle linear infinite;
         }
+
         @keyframes floatParticle {
-            0% { transform: translateY(100vh) scale(0); opacity: 0; }
-            10% { opacity: 1; transform: translateY(50vh) scale(1); }
-            90% { opacity: 1; transform: translateY(-50px) scale(1.5); }
-            100% { transform: translateY(-100px) scale(2); opacity: 0; }
+            0% {
+                transform: translateY(100vh) scale(0);
+                opacity: 0;
+            }
+
+            10% {
+                opacity: 1;
+                transform: translateY(50vh) scale(1);
+            }
+
+            90% {
+                opacity: 1;
+                transform: translateY(-50px) scale(1.5);
+            }
+
+            100% {
+                transform: translateY(-100px) scale(2);
+                opacity: 0;
+            }
         }
 
         /* UNIQUE MODERN HERO SECTION */
@@ -462,7 +511,7 @@
             align-items: center;
             justify-content: center;
             position: relative;
-            padding: 140px 2rem 4rem;
+            padding: 90px 2rem 4rem;
             background-color: var(--pure-white);
             overflow: hidden;
         }
@@ -700,7 +749,7 @@
             height: 150%;
             top: -25%;
             left: -25%;
-            background: radial-gradient(circle, rgba(34,197,94,0.08) 0%, transparent 65%);
+            background: radial-gradient(circle, rgba(34, 197, 94, 0.08) 0%, transparent 65%);
             z-index: -1;
             pointer-events: none;
         }
@@ -715,13 +764,14 @@
             display: flex;
             flex-direction: column;
         }
+
         .module-card:hover {
-            background: rgba(255,255,255,0.05);
+            background: rgba(255, 255, 255, 0.05);
             backdrop-filter: blur(8px);
             -webkit-backdrop-filter: blur(8px);
             border-color: #22c55e;
             transform: translateY(-4px);
-            box-shadow: 0 20px 40px rgba(34,197,94,0.08);
+            box-shadow: 0 20px 40px rgba(34, 197, 94, 0.08);
             transition: all 0.25s ease;
         }
 
@@ -754,13 +804,14 @@
             transition: all 0.4s ease;
             text-align: left;
         }
+
         .sub-card:hover {
-            background: rgba(255,255,255,0.05);
+            background: rgba(255, 255, 255, 0.05);
             backdrop-filter: blur(8px);
             -webkit-backdrop-filter: blur(8px);
             border-color: #22c55e;
             transform: translateY(-4px);
-            box-shadow: 0 20px 40px rgba(34,197,94,0.08);
+            box-shadow: 0 20px 40px rgba(34, 197, 94, 0.08);
         }
 
         .sub-card-img {
@@ -1198,10 +1249,10 @@
             grid-template-columns: 2fr 1fr 1fr 1fr;
             gap: 4rem;
             margin-bottom: 4rem;
-            background: rgba(255,255,255,0.95);
+            background: rgba(255, 255, 255, 0.95);
             backdrop-filter: blur(10px);
             -webkit-backdrop-filter: blur(10px);
-            border-top: 1px solid rgba(34,197,94,0.1);
+            border-top: 1px solid rgba(34, 197, 94, 0.1);
             padding: 3rem;
             border-radius: 24px;
         }
@@ -1284,170 +1335,411 @@
 
         /* --- RESPONSIVE MEDIA QUERIES --- */
 
-        @media (max-width: 1024px) {
-            .grid-2,
-            .feat-slide {
-                grid-template-columns: 1fr;
-                gap: 4rem;
-            }
-            .feat-icon-area { display: none; }
-            .hero-visual-right { justify-content: center; margin-top: 3rem; }
-            .hero-content { grid-template-columns: 1fr; }
+        /* GLOBAL RULES */
+        body {
+            overflow-x: hidden;
         }
 
-        @media (max-width: 768px) {
-            .grid-3 { grid-template-columns: 1fr; }
-            .sub-cards-grid { grid-template-columns: 1fr; }
-            .section { padding: 5rem 0; }
-            
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 clamp(1.2rem, 5%, 6%);
+        }
+
+        .section {
+            padding: clamp(3rem, 6vw, 6rem) 0;
+        }
+
         .large-heading {
+            font-size: clamp(2rem, 5vw, 3rem);
+            word-break: break-word;
+        }
+
+        .body-text {
+            font-size: clamp(0.95rem, 2vw, 1.05rem);
+            line-height: 1.6;
+        }
+
+        img {
+            max-width: 100%;
+            height: auto;
+        }
+
+        a,
+        button {
+            min-height: 44px;
+            display: inline-flex;
+            align-items: center;
+        }
+
+        /* HERO SECTION REDESIGN */
+        .ddlc-letters {
+            font-size: clamp(3rem, 10vw, 7.5rem) !important;
+            font-family: var(--font-display) !important;
+            font-weight: 800 !important;
+            color: #22c55e !important;
+            display: flex !important;
+            gap: 0.05em;
+            line-height: 1;
+            margin-bottom: 1.5rem;
+            visibility: hidden;
+            /* Initial state */
+        }
+
+        .ddlc-letter-wrap {
             position: relative;
-            display: inline-block;
-            padding-bottom: 0.5rem;
+            display: inline-flex;
+            flex-direction: column;
+            align-items: center;
         }
-        .heading-underline {
+
+        .ddlc-letter {
+            cursor: pointer;
+            transition: color 0.2s ease;
+        }
+
+        .ddlc-hover-word {
             position: absolute;
-            bottom: 0;
-            left: 0;
-            height: 3px;
-            background: #22c55e;
-            width: 0;
-            border-radius: 2px;
+            top: 100%;
+            left: 50%;
+            transform: translateX(-50%) translateY(6px);
+            -webkit-transform: translateX(-50%) translateY(6px);
+            font-family: var(--font-body);
+            font-weight: 400;
+            font-size: clamp(0.7rem, 1.5vw, 0.9rem);
+            color: #22c55e;
+            opacity: 0;
+            transition: opacity 0.2s ease, transform 0.2s ease, -webkit-transform 0.2s ease;
+            white-space: nowrap;
+            pointer-events: none;
+            margin-top: 4px;
         }
 
-        .large-heading { font-size: 2.5rem; }
-            
-            .navbar { height: 70px; }
-            .mobile-menu-btn { display: block; }
+        .ddlc-letter-wrap:hover .ddlc-hover-word {
+            opacity: 1;
+            transform: translateX(-50%) translateY(0);
+            -webkit-transform: translateX(-50%) translateY(0);
+        }
 
-            .nav-links {
-                position: fixed;
-                top: 0;
-                right: -100%;
-                width: 100%;
-                height: 100vh;
-                background: rgba(255, 255, 255, 0.98);
-                backdrop-filter: blur(20px);
-                flex-direction: column;
-                justify-content: center;
-                align-items: center;
-                gap: 2rem;
-                transition: all 0.6s cubic-bezier(0.16, 1, 0.3, 1);
-                z-index: 1500;
-                padding: 2rem;
-            }
+        .hero-tagline {
+            font-family: var(--font-body);
+            font-weight: 400;
+            color: #000000;
+            font-size: clamp(1.1rem, 2.5vw, 1.4rem);
+            margin-bottom: 0.5rem;
+            max-width: 500px;
+            visibility: hidden;
+        }
 
-            .nav-links.active {
-                right: 0;
-            }
+        .hero-full-form-line {
+            font-family: 'DM Mono', monospace;
+            font-size: 0.75rem;
+            color: var(--gray-text);
+            letter-spacing: 0.15em;
+            text-transform: uppercase;
+            margin-bottom: 2.5rem;
+            opacity: 0;
+            transform: translateY(10px);
+            -webkit-transform: translateY(10px);
+            transition: opacity 0.4s ease, transform 0.4s ease, -webkit-transform 0.4s ease;
+        }
 
-            .nav-links a {
-                font-size: 2rem;
-                font-family: 'Syne', sans-serif;
-                font-weight: 700;
-                opacity: 0;
-                transform: translateY(20px);
-                transition: all 0.4s ease;
-            }
+        .hero-full-form-line.visible {
+            opacity: 1;
+            transform: translateY(0);
+            -webkit-transform: translateY(0);
+        }
 
-            .nav-links.active a {
+        /* Animation Helper Classes */
+        .tw-cursor {
+            display: inline-block;
+            color: #22c55e;
+            animation: twBlink 0.65s step-end infinite;
+            margin-left: 2px;
+        }
+
+        @keyframes twBlink {
+
+            0%,
+            100% {
                 opacity: 1;
-                transform: translateY(0);
             }
 
-            .nav-links.active a:nth-child(1) { transition-delay: 0.1s; }
-            .nav-links.active a:nth-child(2) { transition-delay: 0.2s; }
-            .nav-links.active a:nth-child(3) { transition-delay: 0.3s; }
-            .nav-links.active a:nth-child(4) { transition-delay: 0.4s; }
-            .nav-links.active a:nth-child(5) { transition-delay: 0.5s; }
-
-            .hero { padding: 140px 1.5rem 5rem; text-align: center; }
-            .hero-content { align-items: center; }
-            .hero-interactive-ddlc { align-items: center; }
-            .ddlc-letters { font-size: 5rem; }
-            .hero-product-img { max-width: 80%; transform: rotate(0); }
-            
-            .sticky-demo { position: relative; width: 100%; top: 0; margin-top: 4rem; }
-            .timeline-item { flex-direction: column; align-items: center; text-align: center; }
-            .timeline-line { left: 50%; height: 100%; }
-            .tl-number { margin: 0 auto; }
+            50% {
+                opacity: 0;
+            }
         }
 
-        @media (max-width: 480px) {
+        .hero-product-img {
+            opacity: 0;
+            transform: translateX(60px);
+            -webkit-transform: translateX(60px);
+            transition: opacity 0.7s cubic-bezier(0.16, 1, 0.3, 1), transform 0.7s cubic-bezier(0.16, 1, 0.3, 1), -webkit-transform 0.7s cubic-bezier(0.16, 1, 0.3, 1);
+            max-width: 440px !important;
+        }
+
+        .hero-product-img.visible {
+            opacity: 1;
+            transform: translateX(0);
+            -webkit-transform: translateX(0);
+        }
+
+        /* STATS BAR */
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 2rem;
+        }
+
+        .anime-stat {
+            font-size: clamp(1.8rem, 4vw, 2.5rem) !important;
+        }
+
+        /* RESPONSIVE MEDIA QUERIES */
+
+        /* Laptop */
+        @media (max-width: 1279px) {
+            .container {
+                max-width: 1000px;
+            }
+        }
+
+        /* Tablet */
+        @media (max-width: 1023px) {
+            .nav-links {
+                display: none !important;
+            }
+
+            .mobile-menu-btn {
+                display: flex !important;
+                align-items: center;
+                justify-content: center;
+                color: #22c55e;
+            }
+
+            .grid-3 {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .stats-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .stat-divider {
+                display: none !important;
+            }
+
+            .hero-content {
+                gap: 1.5rem;
+            }
+
             .footer-top {
                 grid-template-columns: 1fr;
+                gap: 2rem;
             }
 
-            .footer-bottom {
-                flex-direction: column;
-                gap: 1rem;
+            .app-track {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .industries-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .industries-grid .app-slide:nth-child(3) {
+                grid-column: span 2;
+            }
+        }
+
+        /* Mobile */
+        @media (max-width: 767px) {
+            .grid-2 {
+                grid-template-columns: 1fr !important;
                 text-align: center;
             }
+
+            .hero-content {
+                grid-template-columns: 1fr !important;
+                flex-direction: column-reverse;
+                display: flex;
+            }
+
+            .hero-visual-right {
+                order: -1;
+                margin-bottom: 2rem;
+                justify-content: center;
+            }
+
+            .hero-product-img {
+                max-width: 280px !important;
+            }
+
+            .hero-interactive-ddlc {
+                align-items: center !important;
+            }
+
+            .hero-full-form {
+                text-align: center;
+            }
+
+            .btn-group {
+                flex-direction: column;
+                display: flex;
+                width: 100%;
+                gap: 1rem;
+            }
+
+            .btn {
+                width: 100%;
+            }
+
+            .grid-3 {
+                grid-template-columns: 1fr !important;
+            }
+
+            .sub-cards-grid {
+                grid-template-columns: 1fr !important;
+            }
+
+            .timeline-item {
+                flex-direction: column;
+                align-items: center;
+                text-align: center;
+            }
+
+            .tl-img {
+                width: 60px !important;
+                height: 60px !important;
+                margin: 0 auto;
+            }
+
+            .sticky-demo {
+                display: none !important;
+            }
+
+            .app-track {
+                grid-template-columns: 1fr !important;
+            }
+
+            .footer-top {
+                text-align: center;
+            }
+
+            .footer-brand,
+            .footer-list {
+                align-items: center;
+                display: flex;
+                flex-direction: column;
+            }
+
+            .footer-socials {
+                justify-content: center;
+            }
+
+            .tl-content {
+                flex-direction: column;
+                gap: 1rem;
+            }
+
+            .app-img {
+                height: 200px !important;
+            }
+
+            .industries-grid .app-slide:nth-child(3) {
+                grid-column: span 1;
+            }
         }
-            .floating-whatsapp {
+
+        /* Small Mobile */
+        @media (max-width: 424px) {
+            .app-img {
+                height: 160px !important;
+            }
+
+            .module-card {
+                padding: 1.5rem !important;
+            }
+
+            .large-heading {
+                font-size: 1.75rem;
+            }
+        }
+
+        /* Very Small */
+        @media (max-width: 374px) {
+            .app-img {
+                height: 140px !important;
+            }
+
+            .large-heading {
+                font-size: 1.5rem;
+            }
+        }
+
+        /* Navbar Mobile Menu Overlay */
+        .nav-links.mobile-active {
+            display: flex !important;
             position: fixed;
-            bottom: 2rem;
-            right: 2rem;
-            z-index: 999;
-            width: 60px;
-            height: 60px;
-            background-color: #25d366;
-            color: #ffffff;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            box-shadow: 0 4px 14px rgba(37,211,102,0.4);
-            transition: all 0.2s ease;
-            animation: whatsapp-pulse 2s infinite;
+            top: 64px;
+            left: 0;
+            width: 100%;
+            height: auto;
+            background: #ffffff;
+            flex-direction: column;
+            padding: 1rem 6%;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+            z-index: 1001;
+            gap: 1rem;
         }
 
-        .floating-whatsapp:hover {
-            transform: scale(1.08);
-            box-shadow: 0 6px 20px rgba(37,211,102,0.6);
-            animation: none;
+        .nav-links.mobile-active a {
+            width: 100%;
+            padding: 0.5rem 0;
+            border-bottom: 1px solid #f1f5f9;
+            font-size: 1rem;
+            color: var(--black-text);
         }
 
-        .floating-whatsapp svg {
-            width: 32px;
-            height: 32px;
-            fill: currentColor;
-        }
-
-        @keyframes whatsapp-pulse {
-            0% {
-                box-shadow: 0 0 0 0 rgba(37, 211, 102, 0.6);
-            }
-            70% {
-                box-shadow: 0 0 0 15px rgba(37, 211, 102, 0);
-            }
-            100% {
-                box-shadow: 0 0 0 0 rgba(37, 211, 102, 0);
+        /* Industries Hover fix */
+        @media (hover: none) {
+            .app-img {
+                transform: none !important;
             }
         }
 
-        /* Typewriter Animation CSS */
         .tw-cursor {
             animation: cursorBlink 0.65s step-end infinite;
             color: #22c55e;
             font-weight: 800;
             display: inline-block;
         }
+
         @keyframes cursorBlink {
-            0%, 100% { opacity: 1; }
-            50% { opacity: 0; }
+
+            0%,
+            100% {
+                opacity: 1;
+            }
+
+            50% {
+                opacity: 0;
+            }
         }
+
         .hero-full-form {
             opacity: 0;
             transform: translateY(10px);
         }
+
         .hero-interactive-subtitle {
             opacity: 0;
         }
+
         .hero-product-img {
             opacity: 0;
             transform: translateX(60px);
         }
+
         .ddlc-letters {
             opacity: 0;
         }
@@ -1456,7 +1748,9 @@
 
 <body>
     <!-- Smooth Scroll Progress Bar -->
-    <div id="scrollProgressBar" style="position: fixed; top: 0; left: 0; height: 3px; background-color: #22c55e; width: 0%; z-index: 9999; transition: width 0.1s ease-out;"></div>
+    <div id="scrollProgressBar"
+        style="position: fixed; top: 0; left: 0; height: 3px; background-color: #22c55e; width: 0%; z-index: 9999; transition: width 0.1s ease-out;">
+    </div>
 
 
     <!-- Professional Navbar -->
@@ -1476,92 +1770,72 @@
                 <a href="#contact" class="btn" style="padding: 0.6rem 1.5rem; font-size: 0.9rem;">Contact Us</a>
             </div>
 
-            <button class="mobile-menu-btn" id="menuBtn">
-                <span class="hamburger-line line-1"></span>
-                <span class="hamburger-line line-2"></span>
+            <button class="mobile-menu-btn" id="menuBtn"
+                style="display: none; background: none; border: none; cursor: pointer;">
+                <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#22c55e" stroke-width="2"
+                    stroke-linecap="round" stroke-linejoin="round">
+                    <line x1="3" y1="12" x2="21" y2="12"></line>
+                    <line x1="3" y1="6" x2="21" y2="6"></line>
+                    <line x1="3" y1="18" x2="21" y2="18"></line>
+                </svg>
             </button>
         </div>
     </nav>
 
     <section id="home" class="hero">
-    
 
-        
-    
 
-        
+
+
+
+
         <div class="container hero-content">
             <div style="display:flex; flex-direction:column; align-items:flex-start;" class="reveal-element">
-                <div class="hero-interactive-ddlc">
-                    <div class="ddlc-letters">
-                        <div class="ddlc-letter-container">
-                            <span class="ddlc-letter">D</span>
-                            <span class="ddlc-tooltip">Data</span>
-                        </div>
-                        <div class="ddlc-letter-container">
-                            <span class="ddlc-letter">D</span>
-                            <span class="ddlc-tooltip">Driven</span>
-                        </div>
-                        <div class="ddlc-letter-container">
-                            <span class="ddlc-letter">L</span>
-                            <span class="ddlc-tooltip">Logic</span>
-                        </div>
-                        <div class="ddlc-letter-container">
-                            <span class="ddlc-letter">C</span>
-                            <span class="ddlc-tooltip">Controllers</span>
-                        </div>
+                <div class="hero-interactive-ddlc" id="heroLeft">
+                    <div id="ddlc-heading"
+                        style="display: flex; gap: 0.05em; align-items: flex-start; font-size: clamp(4rem, 10vw, 8rem); font-weight: 800; color: #22c55e; line-height: 1; letter-spacing: -3px; margin-bottom: 1rem; font-family: inherit;">
+                        <span class="ddlc-letter"
+                            style="position:relative;display:inline-flex;flex-direction:column;align-items:center;cursor:default;">
+                            <span class="ddlc-char">D</span>
+                            <span class="ddlc-tip"
+                                style="position:absolute;top:110%;left:50%;transform:translateX(-50%) translateY(6px);opacity:0;transition:opacity 0.2s ease,transform 0.2s ease;font-size:0.8rem;color:#22c55e;letter-spacing:0.06em;white-space:nowrap;pointer-events:none;font-weight:400;font-size:clamp(0.65rem,1.2vw,0.8rem);">Data</span>
+                        </span>
+                        <span class="ddlc-letter"
+                            style="position:relative;display:inline-flex;flex-direction:column;align-items:center;cursor:default;">
+                            <span class="ddlc-char">D</span>
+                            <span class="ddlc-tip"
+                                style="position:absolute;top:110%;left:50%;transform:translateX(-50%) translateY(6px);opacity:0;transition:opacity 0.2s ease,transform 0.2s ease;font-size:0.8rem;color:#22c55e;letter-spacing:0.06em;white-space:nowrap;pointer-events:none;font-weight:400;font-size:clamp(0.65rem,1.2vw,0.8rem);">Driven</span>
+                        </span>
+                        <span class="ddlc-letter"
+                            style="position:relative;display:inline-flex;flex-direction:column;align-items:center;cursor:default;">
+                            <span class="ddlc-char">L</span>
+                            <span class="ddlc-tip"
+                                style="position:absolute;top:110%;left:50%;transform:translateX(-50%) translateY(6px);opacity:0;transition:opacity 0.2s ease,transform 0.2s ease;font-size:0.8rem;color:#22c55e;letter-spacing:0.06em;white-space:nowrap;pointer-events:none;font-weight:400;font-size:clamp(0.65rem,1.2vw,0.8rem);">Logic</span>
+                        </span>
+                        <span class="ddlc-letter"
+                            style="position:relative;display:inline-flex;flex-direction:column;align-items:center;cursor:default;">
+                            <span class="ddlc-char">C</span>
+                            <span class="ddlc-tip"
+                                style="position:absolute;top:110%;left:50%;transform:translateX(-50%) translateY(6px);opacity:0;transition:opacity 0.2s ease,transform 0.2s ease;font-size:0.8rem;color:#22c55e;letter-spacing:0.06em;white-space:nowrap;pointer-events:none;font-weight:400;font-size:clamp(0.65rem,1.2vw,0.8rem);">Controllers</span>
+                        </span>
                     </div>
-                    <div class="hero-full-form" style="margin-top: 0.5rem; margin-bottom: 0.5rem;">
-                        Data Driven Logic Controllers
-                    </div>
-                    <div class="hero-interactive-subtitle">
-                        The intelligent edge for modern automation.
-                    </div>
+
+                    <div id="ddlc-fullform" class="hero-full-form-line" style="visibility:hidden"></div>
+
+                    <h2 id="ddlc-tagline" class="hero-tagline" style="visibility:hidden"></h2>
                 </div>
             </div>
 
-            <div class="hero-visual-right reveal-element">
-                <img src="https://ddlc-website-ecru.vercel.app/ddlc__1_.png" alt="DDLC Hardware" class="hero-product-img" style="filter: drop-shadow(0 20px 40px rgba(0,0,0,0.15));">
+            <div class="hero-visual-right hero-rest" style="opacity: 0;">
+                <img src="ddlc__1_.png" alt="DDLC Hardware" class="hero-product-img" id="heroImg"
+                    style="filter: drop-shadow(0 20px 40px rgba(0,0,0,0.15));">
             </div>
         </div>
 
     </section>
 
-    
-    
 
 
-    <!-- Stats Bar -->
-    <section class="stats-bar reveal-section" style="width: 100%; background-color: #ffffff; padding: 4rem 2rem; border-bottom: 1px solid rgba(34,197,94,0.12);">
-        <div class="container">
-            <div class="stats-grid" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 2rem;">
-                <div class="stat-card" style="background: rgba(255,255,255,0.6); backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px); border: 1px solid rgba(255,255,255,0.5); border-radius: 16px; padding: 1.5rem 2rem; box-shadow: 0 8px 32px rgba(34,197,94,0.06); text-align: center; position: relative;">
-                    <div class="anime-stat" data-target="50" style="font-family: var(--font-display); font-size: 3.5rem; font-weight: 700; color: #22c55e; line-height: 1;">0</div>
-                    <div style="font-family: 'DM Mono', monospace; font-size: 0.8rem; color: var(--gray-text); text-transform: uppercase; letter-spacing: 0.1em; margin-top: 0.5rem;">Early Access Slots</div>
-                    <div class="stat-divider" style="position: absolute; right: -1rem; top: 20%; bottom: 20%; width: 1px; background: rgba(34,197,94,0.2);"></div>
-                </div>
-                <div class="stat-card" style="background: rgba(255,255,255,0.6); backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px); border: 1px solid rgba(255,255,255,0.5); border-radius: 16px; padding: 1.5rem 2rem; box-shadow: 0 8px 32px rgba(34,197,94,0.06); text-align: center; position: relative;">
-                    <div class="anime-stat" data-target="12" data-suffix="ms" style="font-family: var(--font-display); font-size: 3.5rem; font-weight: 700; color: #22c55e; line-height: 1;">0<span style="font-size: 2rem;">ms</span></div>
-                    <div style="font-family: 'DM Mono', monospace; font-size: 0.8rem; color: var(--gray-text); text-transform: uppercase; letter-spacing: 0.1em; margin-top: 0.5rem;">Target Inference Speed</div>
-                    <div class="stat-divider" style="position: absolute; right: -1rem; top: 20%; bottom: 20%; width: 1px; background: rgba(34,197,94,0.2);"></div>
-                </div>
-                <div class="stat-card" style="background: rgba(255,255,255,0.6); backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px); border: 1px solid rgba(255,255,255,0.5); border-radius: 16px; padding: 1.5rem 2rem; box-shadow: 0 8px 32px rgba(34,197,94,0.06); text-align: center; position: relative;">
-                    <div class="anime-stat" data-target="99.7" data-suffix="%" style="font-family: var(--font-display); font-size: 3.5rem; font-weight: 700; color: #22c55e; line-height: 1;">0<span style="font-size: 2rem;">%</span></div>
-                    <div style="font-family: 'DM Mono', monospace; font-size: 0.8rem; color: var(--gray-text); text-transform: uppercase; letter-spacing: 0.1em; margin-top: 0.5rem;">Lab Accuracy Rate</div>
-                    <div class="stat-divider" style="position: absolute; right: -1rem; top: 20%; bottom: 20%; width: 1px; background: rgba(34,197,94,0.2);"></div>
-                </div>
-                <div class="stat-card" style="background: rgba(255,255,255,0.6); backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px); border: 1px solid rgba(255,255,255,0.5); border-radius: 16px; padding: 1.5rem 2rem; box-shadow: 0 8px 32px rgba(34,197,94,0.06); text-align: center;">
-                    <div style="font-family: var(--font-display); font-size: 3.5rem; font-weight: 700; color: #22c55e; line-height: 1;" class="anime-text-reveal">Q3 2025</div>
-                    <div style="font-family: 'DM Mono', monospace; font-size: 0.8rem; color: var(--gray-text); text-transform: uppercase; letter-spacing: 0.1em; margin-top: 0.5rem;">Commercial Launch</div>
-                </div>
-            </div>
-            <style>
-                @media (max-width: 768px) {
-                    .stat-divider { display: none !important; }
-                }
-            </style>
-        </div>
-    </section>
 
 
 
@@ -1570,7 +1844,8 @@
         <div class="container">
             <div style="text-align: center; max-width: 800px; margin: 0 auto 3rem;">
                 <span class="section-label">Use Cases</span>
-                <h2 class="large-heading">Flawless execution through perfect perception<span class="heading-underline"></span></h2>
+                <h2 class="large-heading">Flawless execution through perfect perception<span
+                        class="heading-underline"></span></h2>
                 <p class="body-text">DDLC modules sit at the intersection of AI vision and hardcore mechanical control,
                     offering unparalleled inline inspection capabilities.</p>
             </div>
@@ -1584,7 +1859,8 @@
                         </svg>
                     </div>
                     <h3 class="module-card-title">Surface Inspection</h3>
-                    <p class="module-card-body">Identifies microscopic cosmetic defects and texture anomalies in real-time
+                    <p class="module-card-body">Identifies microscopic cosmetic defects and texture anomalies in
+                        real-time
                         using high-resolution natural vision systems integrated directly into the control loop.</p>
                 </div>
                 <div class="module-card rounded-24">
@@ -1595,7 +1871,8 @@
                         </svg>
                     </div>
                     <h3 class="module-card-title">Child Part Assembly</h3>
-                    <p class="module-card-body">Verifies individual sub-components during assembly to ensure zero-defect integrity before final integration. Catches errors before they become costly failures.</p>
+                    <p class="module-card-body">Verifies individual sub-components during assembly to ensure zero-defect
+                        integrity before final integration. Catches errors before they become costly failures.</p>
                 </div>
                 <div class="module-card rounded-24">
                     <div class="module-icon">
@@ -1619,7 +1896,8 @@
                             class="sub-card-img" alt="Bottle Inspection">
                         <div class="sub-card-content">
                             <h4 class="sub-card-title">Bottle Inspection</h4>
-                            <p class="sub-card-desc">AI vision detects cracks, fill levels and cap integrity at production line speeds.</p>
+                            <p class="sub-card-desc">AI vision detects cracks, fill levels and cap integrity at
+                                production line speeds.</p>
                         </div>
                     </div>
                     <div class="sub-card">
@@ -1635,7 +1913,8 @@
                             class="sub-card-img" alt="Biscuit Inspection">
                         <div class="sub-card-content">
                             <h4 class="sub-card-title">Biscuit Inspection</h4>
-                            <p class="sub-card-desc">Detect broken pieces and foreign objects with sub-millimeter precision.</p>
+                            <p class="sub-card-desc">Detect broken pieces and foreign objects with sub-millimeter
+                                precision.</p>
                         </div>
                     </div>
                 </div>
@@ -1648,7 +1927,8 @@
         <div class="container grid-2">
             <div>
                 <span class="section-label">The Shift</span>
-                <h2 class="large-heading">A paradigm shift in control engineering<span class="heading-underline"></span></h2>
+                <h2 class="large-heading">A paradigm shift in control engineering<span class="heading-underline"></span>
+                </h2>
                 <p class="body-text">Unlike traditional control systems that rely strictly on fixed logic rules, DDLCs
                     leverage the power of continuous data streams and artificial intelligence.</p>
                 <p class="body-text">Sitting invisibly atop Programmable Logic Controllers (PLCs), DDLCs act as
@@ -1657,9 +1937,12 @@
             </div>
             <div class="visual-card"
                 style="background:var(--pure-white); border:1px solid var(--border-color); border-radius:32px; padding:3rem; box-shadow:var(--card-shadow); display:flex; align-items:center; justify-content:center;">
-                <div class="reveal-image-container"><img src="ddlc_img1.jpg" alt="DDLC Engineering Concept" class="rounded-24 branded-img"
-                    onerror="this.onerror=null; this.src='https://picsum.photos/seed/ddlcx1/800/600';"
-                    style="max-width:100%; border-radius:16px;"><div class="reveal-overlay"></div></div>
+                <div class="reveal-image-container"><img src="ddlc_img1.jpg" alt="DDLC Engineering Concept"
+                        class="rounded-24 branded-img"
+                        onerror="this.onerror=null; this.src='https://picsum.photos/seed/ddlcx1/800/600';"
+                        style="max-width:100%; border-radius:16px;">
+                    <div class="reveal-overlay"></div>
+                </div>
             </div>
         </div>
     </section>
@@ -1685,7 +1968,8 @@
                                 </svg>
                             </div>
                             <div>
-                                <h3 class="large-heading" style="font-size: 2.5rem;">Data Agnostic Integration<span class="heading-underline"></span></h3>
+                                <h3 class="large-heading" style="font-size: 2.5rem;">Data Agnostic Integration<span
+                                        class="heading-underline"></span></h3>
                                 <p class="body-text">DDLCs are highly versatile integration layers. They effortlessly
                                     process a wide spectrum of data types simultaneously, including raw sensor readings,
                                     high-frame-rate images, spatial audio, and localized structured plant data.</p>
@@ -1701,7 +1985,8 @@
                                 </svg>
                             </div>
                             <div>
-                                <h3 class="large-heading" style="font-size: 2.5rem;">Real-Time AI Inference<span class="heading-underline"></span></h3>
+                                <h3 class="large-heading" style="font-size: 2.5rem;">Real-Time AI Inference<span
+                                        class="heading-underline"></span></h3>
                                 <p class="body-text">By pushing machine learning to the deep edge, DDLCs learn from
                                     real-world physical anomalies. They execute informed operational overrides in
                                     real-time, boosting yield quality and preventing mechanical downtime.</p>
@@ -1719,7 +2004,8 @@
                                 </svg>
                             </div>
                             <div>
-                                <h3 class="large-heading" style="font-size: 2.5rem;">Multi-Modal ML Engine<span class="heading-underline"></span></h3>
+                                <h3 class="large-heading" style="font-size: 2.5rem;">Multi-Modal ML Engine<span
+                                        class="heading-underline"></span></h3>
                                 <p class="body-text">Standard logic looks at one sensor. Our Multi-Modal engine offers a
                                     holistic view of mechanical dynamics by evaluating sight, sound, and pressure inputs
                                     concurrently, forming a complete intelligence net.</p>
@@ -1763,8 +2049,7 @@
                     <div class="timeline-item">
                         <div class="tl-number">1</div>
                         <div class="tl-content">
-                            <img src="https://images.unsplash.com/photo-1565153907400-7e01a9ab25f3?w=400&q=80" class="tl-img branded-img" alt="Capture Phase"
-                                onerror="this.onerror=null; this.src='https://picsum.photos/seed/ddlcsensor1/400/300';">
+                            <img src="deploy_capture_1777816104827.png" class="tl-img branded-img" alt="Capture Phase">
                             <div class="tl-text">
                                 <h4>Capture</h4>
                                 <p>Extracts raw pipeline data straight from existing floor sensors, PLCs, and connected
@@ -1776,11 +2061,11 @@
                     <div class="timeline-item">
                         <div class="tl-number">2</div>
                         <div class="tl-content">
-                            <img src="https://images.unsplash.com/photo-1518770660439-4636190af475?w=400&q=80" class="tl-img branded-img" alt="Secure Upload"
-                                onerror="this.onerror=null; this.src='https://picsum.photos/seed/ddlccloud2/400/300';">
+                            <img src="deploy_sync_1777816355365.png" class="tl-img branded-img" alt="Secure Upload">
                             <div class="tl-text">
                                 <h4>Synchronize</h4>
-                                <p>Uploads high-frequency data to the DDLC cloud ecosystem utilizing military-grade encrypted pipelines.</p>
+                                <p>Uploads high-frequency data to the DDLC cloud ecosystem utilizing military-grade
+                                    encrypted pipelines.</p>
                             </div>
                         </div>
                     </div>
@@ -1788,11 +2073,11 @@
                     <div class="timeline-item">
                         <div class="tl-number">3</div>
                         <div class="tl-content">
-                            <img src="https://images.unsplash.com/photo-1555949963-ff9fe0c870eb?w=400&q=80" class="tl-img branded-img" alt="Train Model"
-                                onerror="this.onerror=null; this.src='https://picsum.photos/seed/ddlctrain3/400/300';">
+                            <img src="deploy_train_1777817226597.png" class="tl-img branded-img" alt="Train Model">
                             <div class="tl-text">
                                 <h4>Train AI</h4>
-                                <p>Defines specific mechanical use cases and automatically maps and instructs the neural weights.</p>
+                                <p>Defines specific mechanical use cases and automatically maps and instructs the neural
+                                    weights.</p>
                             </div>
                         </div>
                     </div>
@@ -1800,11 +2085,11 @@
                     <div class="timeline-item">
                         <div class="tl-number">4</div>
                         <div class="tl-content">
-                            <img src="https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?w=400&q=80" class="tl-img branded-img" alt="Verify"
-                                onerror="this.onerror=null; this.src='https://picsum.photos/seed/ddlcverify4/400/300';">
+                            <img src="deploy_verify_1777817327241.png" class="tl-img branded-img" alt="Verify">
                             <div class="tl-text">
                                 <h4>Simulate</h4>
-                                <p>Tests computational accuracy in sandboxed twins using historical failure data prior to live deployment.</p>
+                                <p>Tests computational accuracy in sandboxed twins using historical failure data prior
+                                    to live deployment.</p>
                             </div>
                         </div>
                     </div>
@@ -1812,11 +2097,11 @@
                     <div class="timeline-item">
                         <div class="tl-number">5</div>
                         <div class="tl-content">
-                            <img src="https://images.unsplash.com/photo-1581092334651-ddf26d9a09d0?w=400&q=80" class="tl-img branded-img" alt="Hardware Deploy"
-                                onerror="this.onerror=null; this.src='https://picsum.photos/seed/ddlchardware5/400/300';">
+                            <img src="ddlc__1_.png" class="tl-img branded-img" alt="Hardware Deploy">
                             <div class="tl-text">
                                 <h4>Edge Actuation</h4>
-                                <p>Flashes the confirmed intelligence model natively onto physical DDLC chassis attached to your line.</p>
+                                <p>Flashes the confirmed intelligence model natively onto physical DDLC chassis attached
+                                    to your line.</p>
                             </div>
                         </div>
                     </div>
@@ -1847,7 +2132,7 @@
 
         <div class="container" style="max-width: 1400px; padding: 0 1rem;">
             <div class="app-slider-container">
-                <div class="app-track" id="appTrack">
+                <div class="app-track industries-grid" id="appTrack">
 
                     <div class="app-slide">
                         <img src="sliderimg1.jpg" class="app-img branded-img" alt="Manufacturing Factory"
@@ -1855,7 +2140,8 @@
                         <div class="app-overlay">
                             <div class="app-text-block">
                                 <h3>Smart Manufacturing</h3>
-                                <p>Automates cosmetic inspections, predicts tool degradation, and optimizes assembly pipelines using visual and acoustic signatures.</p>
+                                <p>Automates cosmetic inspections, predicts tool degradation, and optimizes assembly
+                                    pipelines using visual and acoustic signatures.</p>
                             </div>
                         </div>
                     </div>
@@ -2037,15 +2323,31 @@
     </footer>
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js"></script>
-    
+
     <!-- Interactive Scripts -->
     <script>
         document.addEventListener("DOMContentLoaded", () => {
+            const menuBtn = document.getElementById('menuBtn');
+            const navLinks = document.getElementById('navLinks');
+
+            if (menuBtn && navLinks) {
+                menuBtn.addEventListener('click', () => {
+                    navLinks.classList.toggle('mobile-active');
+                });
+
+                // Close menu on link click
+                navLinks.querySelectorAll('a').forEach(link => {
+                    link.addEventListener('click', () => {
+                        navLinks.classList.remove('mobile-active');
+                    });
+                });
+            }
+
             document.body.classList.add('loaded');
 
-            
+
             const heroImg = document.querySelector('.hero-product-img');
-            if(heroImg) {
+            if (heroImg) {
                 anime({
                     targets: heroImg,
                     translateX: [80, 0],
@@ -2064,10 +2366,10 @@
                     const y = e.clientY - rect.top;
                     const centerX = rect.width / 2;
                     const centerY = rect.height / 2;
-                    
+
                     const rotateX = ((y - centerY) / centerY) * -5;
                     const rotateY = ((x - centerX) / centerX) * 5;
-                    
+
                     card.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) translateY(-4px)`;
                     card.style.transition = 'none';
                 });
@@ -2082,9 +2384,9 @@
                 entries.forEach(entry => {
                     if (entry.isIntersecting) {
                         const el = entry.target;
-                        
+
                         // Section Headings
-                        if(el.classList.contains('large-heading') && !el.classList.contains('animated')) {
+                        if (el.classList.contains('large-heading') && !el.classList.contains('animated')) {
                             el.classList.add('animated');
                             anime({
                                 targets: el,
@@ -2095,7 +2397,7 @@
                             });
                             // Underline
                             const underline = el.querySelector('.heading-underline');
-                            if(underline) {
+                            if (underline) {
                                 anime({
                                     targets: underline,
                                     width: [0, 60],
@@ -2106,7 +2408,7 @@
                         }
 
                         // Countdown boxes
-                        if(el.classList.contains('countdown-grid') && !el.classList.contains('animated')) {
+                        if (el.classList.contains('countdown-grid') && !el.classList.contains('animated')) {
                             el.classList.add('animated');
                             anime({
                                 targets: el.querySelectorAll('.countdown-box'),
@@ -2119,14 +2421,14 @@
                         }
 
                         // Stats count up with slot machine effect
-                        if(el.classList.contains('stats-grid') && !el.classList.contains('animated')) {
+                        if (el.classList.contains('stats-grid') && !el.classList.contains('animated')) {
                             el.classList.add('animated');
                             const statEls = el.querySelectorAll('.anime-stat');
                             statEls.forEach((statEl, i) => {
                                 const finalVal = parseFloat(statEl.getAttribute('data-target'));
                                 const isFloat = finalVal % 1 !== 0;
                                 const suffix = statEl.getAttribute('data-suffix') || '';
-                                
+
                                 // Slot machine effect
                                 let obj = { val: 0 };
                                 anime({
@@ -2136,16 +2438,16 @@
                                     duration: 2000,
                                     delay: i * 150,
                                     easing: 'easeOutExpo',
-                                    update: function() {
+                                    update: function () {
                                         // add random noise while updating
                                         let displayVal = obj.val;
-                                        if(obj.val < finalVal * 0.9) {
+                                        if (obj.val < finalVal * 0.9) {
                                             displayVal = Math.random() * finalVal;
                                         }
                                         displayVal = isFloat ? displayVal.toFixed(1) : Math.floor(displayVal);
                                         statEl.innerHTML = displayVal + `<span style="font-size: 2rem;">${suffix}</span>`;
                                     },
-                                    complete: function() {
+                                    complete: function () {
                                         statEl.innerHTML = (isFloat ? finalVal.toFixed(1) : finalVal) + `<span style="font-size: 2rem;">${suffix}</span>`;
                                     }
                                 });
@@ -2153,7 +2455,7 @@
                         }
 
                         // Card grids
-                        if(el.classList.contains('grid-3') && !el.classList.contains('animated')) {
+                        if (el.classList.contains('grid-3') && !el.classList.contains('animated')) {
                             el.classList.add('animated');
                             anime({
                                 targets: el.querySelectorAll('.module-card'),
@@ -2166,18 +2468,18 @@
                         }
 
                         // Image reveals
-                        if(el.classList.contains('reveal-image-container') && !el.classList.contains('animated')) {
+                        if (el.classList.contains('reveal-image-container') && !el.classList.contains('animated')) {
                             el.classList.add('animated');
                             const img = el.querySelector('img');
                             const overlay = el.querySelector('.reveal-overlay');
-                            
+
                             anime({
                                 targets: overlay,
                                 clipPath: ['inset(0 0 0 0)', 'inset(0 100% 0 0)'],
                                 duration: 800,
                                 easing: 'easeInOutQuart'
                             });
-                            
+
                             anime({
                                 targets: img,
                                 opacity: [0, 1],
@@ -2186,9 +2488,9 @@
                                 easing: 'easeOutQuart'
                             });
                         }
-                        
+
                         // Deploy steps
-                        if(el.classList.contains('timeline-wrapper') && !el.classList.contains('animated')) {
+                        if (el.classList.contains('timeline-wrapper') && !el.classList.contains('animated')) {
                             el.classList.add('animated');
                             anime({
                                 targets: el.querySelectorAll('.timeline-item'),
@@ -2201,7 +2503,7 @@
                         }
 
                         // Section labels
-                        if(el.classList.contains('section-label') && !el.classList.contains('animated')) {
+                        if (el.classList.contains('section-label') && !el.classList.contains('animated')) {
                             el.classList.add('animated');
                             anime({
                                 targets: el,
@@ -2218,16 +2520,16 @@
 
             document.querySelectorAll('.large-heading, .countdown-grid, .stats-grid, .grid-3, .reveal-image-container, .timeline-wrapper, .section-label').forEach(el => {
                 observer.observe(el);
-                if(el.classList.contains('large-heading') || el.classList.contains('section-label')) {
+                if (el.classList.contains('large-heading') || el.classList.contains('section-label')) {
                     el.style.opacity = '0';
                 }
-                if(el.classList.contains('countdown-grid')) {
+                if (el.classList.contains('countdown-grid')) {
                     el.querySelectorAll('.countdown-box').forEach(b => b.style.opacity = '0');
                 }
-                if(el.classList.contains('grid-3')) {
+                if (el.classList.contains('grid-3')) {
                     el.querySelectorAll('.module-card').forEach(b => b.style.opacity = '0');
                 }
-                if(el.classList.contains('timeline-wrapper')) {
+                if (el.classList.contains('timeline-wrapper')) {
                     el.querySelectorAll('.timeline-item').forEach(b => b.style.opacity = '0');
                 }
             });
@@ -2235,8 +2537,8 @@
             // Hero Glow Follow
             const cursorGlow = document.getElementById('heroCursorGlow');
             const heroSection = document.getElementById('home');
-            
-            if(cursorGlow && heroSection) {
+
+            if (cursorGlow && heroSection) {
                 heroSection.addEventListener('mousemove', (e) => {
                     cursorGlow.style.opacity = '1';
                     cursorGlow.style.left = e.pageX + 'px';
@@ -2260,16 +2562,16 @@
         // Scroll Progress & Navbar
         window.addEventListener('scroll', () => {
             const navbar = document.querySelector('.navbar');
-            if(navbar) {
+            if (navbar) {
                 if (window.scrollY > 50) {
                     navbar.classList.add('scrolled');
                 } else {
                     navbar.classList.remove('scrolled');
                 }
             }
-            
+
             const progressBar = document.getElementById('scrollProgressBar');
-            if(progressBar) {
+            if (progressBar) {
                 const winScroll = document.body.scrollTop || document.documentElement.scrollTop;
                 const height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
                 const scrolled = (winScroll / height) * 100;
@@ -2281,81 +2583,153 @@
     <!-- Floating Button Replaced -->
 
     <script>
-        document.addEventListener("DOMContentLoaded", () => {
-            const ddlcLettersContainer = document.querySelector('.ddlc-letters');
-            const fullForm = document.querySelector('.hero-full-form');
-            const subtitle = document.querySelector('.hero-interactive-subtitle');
-            const productImg = document.querySelector('.hero-product-img');
-            
-            // Save original HTML structure
-            const originalDDLCHTML = ddlcLettersContainer.innerHTML;
-            
-            // Modified pattern to keep cursor inline
-            function typeWriter(element, text, speed, callback) {
-                let i = 0;
-                element.innerHTML = '';
-                element.style.opacity = '1';
-                
-                const textSpan = document.createElement('span');
-                const cursor = document.createElement('span');
-                cursor.className = 'tw-cursor';
-                cursor.textContent = '|';
-                
-                element.appendChild(textSpan);
-                element.appendChild(cursor);
-                
-                const timer = setInterval(() => {
-                    textSpan.textContent += text[i];
-                    i++;
-                    if (i >= text.length) {
-                        clearInterval(timer);
-                        setTimeout(() => {
-                            cursor.style.opacity = '0';
-                            setTimeout(() => { 
-                                cursor.remove(); 
-                                if (callback) callback(); 
-                            }, 300);
-                        }, 500);
-                    }
-                }, speed);
+        (function () {
+            // Letter hover
+            var letters = document.querySelectorAll('.ddlc-letter');
+            letters.forEach(function (letter) {
+                var tip = letter.querySelector('.ddlc-tip');
+                letter.addEventListener('mouseenter', function () {
+                    tip.style.opacity = '1';
+                    tip.style.transform = 'translateX(-50%) translateY(0)';
+                });
+                letter.addEventListener('mouseleave', function () {
+                    tip.style.opacity = '0';
+                    tip.style.transform = 'translateX(-50%) translateY(6px)';
+                });
+                letter.addEventListener('touchstart', function (e) {
+                    e.preventDefault();
+                    tip.style.opacity = '1';
+                    tip.style.transform = 'translateX(-50%) translateY(0)';
+                    setTimeout(function () {
+                        tip.style.opacity = '0';
+                        tip.style.transform = 'translateX(-50%) translateY(6px)';
+                    }, 1500);
+                });
+            });
+
+            // Typewriter on page load
+            var heading = document.getElementById('ddlc-heading');
+            if (heading) {
+                heading.style.opacity = '0';
+                setTimeout(function () {
+                    heading.style.transition = 'opacity 0.3s ease';
+                    heading.style.opacity = '1';
+                }, 100);
+            }
+        })();
+
+        function typeWriter(el, text, speed, onDone) {
+            el.textContent = '';
+            el.style.visibility = 'visible';
+            el.style.opacity = '1';
+            var i = 0;
+            var cur = document.createElement('span');
+            cur.textContent = '|';
+            cur.style.cssText = 'color:#22c55e;animation:twBlink 0.6s step-end infinite;';
+            el.parentNode.insertBefore(cur, el.nextSibling);
+            var t = setInterval(function () {
+                el.textContent += text.charAt(i);
+                i++;
+                if (i >= text.length) {
+                    clearInterval(t);
+                    setTimeout(function () {
+                        cur.style.transition = 'opacity 0.2s';
+                        cur.style.opacity = '0';
+                        setTimeout(function () {
+                            cur.remove();
+                            if (onDone) onDone();
+                        }, 200);
+                    }, 500);
+                }
+            }, speed);
+        }
+
+        document.addEventListener('DOMContentLoaded', function () {
+            var fullform = document.getElementById('ddlc-fullform');
+            var tagline = document.getElementById('ddlc-tagline');
+            var productImg = document.getElementById('heroImg');
+            var heroRest = document.querySelector('.hero-rest');
+
+            fullform.style.visibility = 'hidden';
+            tagline.style.visibility = 'hidden';
+
+            setTimeout(function () {
+                typeWriter(fullform, 'Data Driven Logic Controllers', 22, function () {
+                    setTimeout(function () {
+                        typeWriter(tagline, 'The intelligent edge for modern automation.', 20, function () {
+                            // Final Fade
+                            setTimeout(function () {
+                                heroRest.style.transition = 'opacity 0.5s ease';
+                                heroRest.style.opacity = '1';
+                                productImg.style.opacity = '1';
+                                productImg.style.transform = 'translateX(0)';
+                            }, 200);
+                        });
+                    }, 150);
+                });
+            }, 400);
+        });
+        // Slider Logic
+        document.addEventListener('DOMContentLoaded', function () {
+            let currentFeatSlide = 0;
+            const featTrack = document.getElementById('featTrack');
+            const featDots = document.querySelectorAll('#featDots .dot');
+            const totalFeatSlides = document.querySelectorAll('.feat-slide').length;
+
+            function updateFeatSlider() {
+                if (featTrack) {
+                    featTrack.style.transform = `translateX(-${currentFeatSlide * 100}%)`;
+                    featDots.forEach((dot, index) => {
+                        dot.classList.toggle('active', index === currentFeatSlide);
+                    });
+                }
             }
 
-            // Sequence
-            setTimeout(() => {
-                // Step 2: DDLC types in
-                ddlcLettersContainer.style.opacity = '1';
-                typeWriter(ddlcLettersContainer, 'DDLC', 130, () => {
-                    
-                    // Restore hoverable letters
-                    ddlcLettersContainer.innerHTML = originalDDLCHTML;
-                    
-                    // Step 3: Full form slides up + Product image slides in
-                    setTimeout(() => {
-                        fullForm.style.transition = 'opacity 0.4s ease, transform 0.4s ease';
-                        fullForm.style.opacity = '1';
-                        fullForm.style.transform = 'translateY(0)';
-                        
-                        productImg.style.transition = 'opacity 0.7s cubic-bezier(0.16, 1, 0.3, 1), transform 0.7s cubic-bezier(0.16, 1, 0.3, 1)';
-                        productImg.style.opacity = '1';
-                        productImg.style.transform = 'translateX(0)';
-                        
-                        // Step 6: Start float animation after slide in
-                        setTimeout(() => {
-                            productImg.style.transition = 'none';
-                            productImg.style.animation = 'heroFloat 5s ease-in-out infinite';
-                        }, 700);
+            function nextFeatSlide() {
+                currentFeatSlide = (currentFeatSlide + 1) % totalFeatSlides;
+                updateFeatSlider();
+            }
 
-                        // Step 4: Tagline types in
-                        setTimeout(() => {
-                            typeWriter(subtitle, 'The intelligent edge for modern automation.', 30, () => {
-                                // Done.
-                            });
-                        }, 200);
-                        
-                    }, 150);
-                    
-                });
-            }, 300);
+            function prevFeatSlide() {
+                currentFeatSlide = (currentFeatSlide - 1 + totalFeatSlides) % totalFeatSlides;
+                updateFeatSlider();
+            }
+
+            function goToFeatSlide(index) {
+                currentFeatSlide = index;
+                updateFeatSlider();
+            }
+
+            let currentAppSlide = 0;
+            const appTrack = document.getElementById('appTrack');
+            const totalAppSlides = document.querySelectorAll('.app-slide').length;
+
+            function updateAppSlider() {
+                if (appTrack) {
+                    appTrack.style.transform = `translateX(-${currentAppSlide * 100}%)`;
+                }
+            }
+
+            function nextAppSlide() {
+                currentAppSlide = (currentAppSlide + 1) % totalAppSlides;
+                updateAppSlider();
+            }
+
+            function prevAppSlide() {
+                currentAppSlide = (currentAppSlide - 1 + totalAppSlides) % totalAppSlides;
+                updateAppSlider();
+            }
+
+            // Make functions global for onclick handlers
+            window.nextFeatSlide = nextFeatSlide;
+            window.prevFeatSlide = prevFeatSlide;
+            window.goToFeatSlide = goToFeatSlide;
+            window.nextAppSlide = nextAppSlide;
+            window.prevAppSlide = prevAppSlide;
+
+            // Autoplay
+            setInterval(nextFeatSlide, 5000);
+            setInterval(nextAppSlide, 6000);
         });
     </script>
 </body>
